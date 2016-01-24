@@ -27,4 +27,10 @@ Simply run::
 
     npm start
 
-and we are good to go. We will probably incorporate ``forever.js`` in the near future.
+and we are good to go. We will probably incorporate forever::
+
+    npm install -g forever
+
+and then run::
+
+    forever start --minUptime 1000 --spinSleepTime 1000 app.js
