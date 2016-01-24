@@ -7,7 +7,7 @@ router.get('/', function(req, res, next) {
 });
 
 router.get('/:play_name', function(req, res, next) {
-    res.render('caption', {corpus: yaml.safeLoad(fs.readFileSync('./data/'+req.params.play_name+'.yml'))});
+    res.render('play', {corpus: yaml.safeLoad(fs.readFileSync('./data/'+req.params.play_name+'.yml'))});
 });
 
 module.exports = router;
