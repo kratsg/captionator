@@ -1,0 +1,7 @@
+extends layout
+
+block content
+    ul
+        each play in plays
+            li
+                a(href="/play/#{play}")= play

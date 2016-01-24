@@ -1,6 +1,8 @@
 extends layout
 
 block content
-  h1= title
-  each slide in #{corpus}
-    p val
+    h1= title
+    each slide, slideIndex in corpus
+        div.slide(class=(slideIndex == 0 ? "active" : undefined))
+            each dialogue, character in slide
+                p #{character} said #{dialogue}
