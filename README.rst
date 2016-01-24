@@ -33,4 +33,4 @@ and we are good to go. We will probably incorporate forever::
 
 and then run::
 
-    forever start --minUptime 1000 --spinSleepTime 1000 app.js
+    forever start --minUptime 1000 --spinSleepTime 1000 ./bin/www
