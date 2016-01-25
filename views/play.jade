@@ -3,6 +3,6 @@ extends layout
 block content
     h1= title
     each slide, slideIndex in corpus
-        div.slide(class=(slideIndex == 0 ? "active" : undefined))
+        div.slide(class=(slideIndex == currIndex ? "active" : undefined))
             each dialogue, character in slide
                 p #{character} said #{dialogue}

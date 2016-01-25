@@ -15,8 +15,12 @@ router.get('/plays', function(req, res, next) {
     });
 });
 
-router.get('/play/:play_name', function(req, res, next) {
-    res.render('play', {corpus: req.yaml.safeLoad(req.fs.readFileSync('./data/'+req.params.play_name+'.yml')), title: req.params.play_name.replace(/_/g, ' ')});
+router.get('/play/:play_name/:currIndex?', function(req, res, next) {
+    res.render('play', {
+                        corpus: req.yaml.safeLoad(req.fs.readFileSync('./data/'+req.params.play_name+'.yml')),
+                        title: req.params.play_name.replace(/_/g, ' '),
+                        currIndex: (typeof req.params.currIndex === undefined ? 0 : req.params.currIndex)
+                       });
 });
 
 module.exports = router;
