@@ -1,7 +1,7 @@
 (function(){
     var playTitle = window.playName.replace(/_/g, ' ');
     var pushState = function(index){
-        history.pushState({}, playTitle+": slide "+index, "/"+index);
+        history.pushState({}, playTitle+": slide "+index, index);
     };
 
     var moveForward = function(){
