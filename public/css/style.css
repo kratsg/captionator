@@ -1,6 +1,9 @@
 body {
     padding: 50px;
     font: 14px Tahoma, Verdana, Segoe, sans-serif;
+    min-width: 800px;
+    color: yellow;
+    background-color: black;
 }
 
 a {
