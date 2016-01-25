@@ -2,12 +2,13 @@ extends layout
 
 block header
     link(rel='stylesheet', href='/css/#{playName}.css')
+    script.
+        window.playName = "#{playName}";
     script(src='/js/mousetrap.min.js')
     script(src='/js/jquery-2.2.0.min.js')
     script(src='/js/play.js')
 
 block content
-    h1= title
     each slide, slideIndex in corpus
         div.slide(class=(slideIndex == currIndex ? "active" : undefined))
             each dialogue, character in slide
