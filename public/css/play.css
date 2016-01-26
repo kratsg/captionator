@@ -27,3 +27,26 @@ body.hide {
 .slide.active {
     display: block;
 }
+
+.line {
+    position: relative;
+}
+
+    .line .character, .line .dialogue {
+        float: left;
+    }
+
+    .line .character {
+        font-weight: bold;
+        font-variant: small-caps;
+        text-transform: lowercase;
+        opacity: 0.75;
+        background-color: red;
+        text-align: right;
+        width: 100px;
+    }
+
+    .line .dialogue {
+        background-color: green;
+        max-width: 700px;
+    }
