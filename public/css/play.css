@@ -1,0 +1,29 @@
+body {
+    font: 14px Tahoma, Verdana, Segoe, sans-serif;
+    color: yellow;
+    background-color: black;
+
+    opacity: 1.0;
+    transition: opacity 0.5s ease-in-out;
+}
+
+body.hide {
+    opacity: 0.0;
+}
+
+.slide {
+    background-color: rgba(255,255,255,0.25); /* background color of all slides */
+    width: 800px; /* maximum width of all slides */
+    margin: 0 auto; /* center div horizontally */
+
+    display: none;
+}
+
+    .slide .line {
+        margin: 0; /* primarily for normalization */
+        padding: 0; /* primarily for normalization */
+    }
+
+.slide.active {
+    display: block;
+}

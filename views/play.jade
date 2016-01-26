@@ -1,6 +1,7 @@
 extends layout
 
 block header
+    link(rel='stylesheet', href='/css/play.css')
     link(rel='stylesheet', href='/css/#{playName}.css')
     script.
         window.playName = "#{playName}";

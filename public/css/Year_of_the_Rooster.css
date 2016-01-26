@@ -1,16 +1,1 @@
-body {
-    opacity: 1.0;
-    transition: opacity 0.5s ease-in-out;
-}
 
-body.hide {
-    opacity: 0.0;
-}
-
-.slide.active {
-    display: block;
-}
-
-.slide {
-    display: none;
-}
