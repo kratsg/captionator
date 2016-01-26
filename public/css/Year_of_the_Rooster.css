@@ -1,1 +1,7 @@
+.character[data-character="action"] {
+    visibility: hidden;
+}
 
+.character[data-character="action"]+.dialogue {
+    font-style: oblique;
+}
