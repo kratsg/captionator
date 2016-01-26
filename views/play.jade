@@ -11,5 +11,7 @@ block header
 block content
     each slide, slideIndex in corpus
         div.slide(class=(slideIndex == currIndex ? "active" : undefined))
-            each dialogue, character in slide
-                div.line #{character} said #{dialogue}
+            section.line
+                each dialogue, character in slide
+                    div.character(data-character=character)= character
+                    div.dialogue= dialogue
