@@ -10,9 +10,30 @@ block header
     script(src='/js/play.js')
 
 block content
-    each slide, slideIndex in corpus
-        div.slide(class=(slideIndex == currIndex ? "active" : undefined))
-            section.line
-                each dialogue, character in slide
-                    div.character(data-character=character.toLowerCase())= character
-                    div.dialogue= dialogue
+    - var slideIndex = 0
+    each item in corpus
+        if item instanceof Array
+            // item is a single slide, iterate over it
+            div.slide(class=(slideIndex == currIndex ? "active" : undefined))
+                each line in item
+                    section.line
+                        each dialogue, character in line
+                            div.character(data-character=character.toLowerCase())= character
+                            if dialogue instanceof Array
+                                <!-- multiple lines for #{character} -->
+                                - dialogue = dialogue.join('<br/>')
+                            div.dialogue!= dialogue
+            - slideIndex++
+        else
+            // item is multiple slides
+            each lines, character in item
+                each dialogue in lines
+                    div.slide(class=(slideIndex == currIndex ? "active" : undefined))
+                        section.line
+                            div.character(data-character=character.toLowerCase())= character
+                            if dialogue instanceof Array
+                                <!-- multiple lines for #{character} -->
+                                - dialogue = dialogue.join('<br/>')
+                            div.dialogue!= dialogue
+                    - slideIndex++
+
