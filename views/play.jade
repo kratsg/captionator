@@ -27,6 +27,8 @@ block content
         else
             // item is multiple slides
             each lines, character in item
+                unless lines instanceof Array
+                    - lines = [lines]
                 each dialogue in lines
                     div.slide(class=(slideIndex == currIndex ? "active" : undefined))
                         section.line
