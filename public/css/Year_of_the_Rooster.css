@@ -1,7 +1,17 @@
-.character[data-character="action"] {
+.character[data-character="action"], .character[data-character="sound"] {
     visibility: hidden;
 }
 
-.character[data-character="action"]+.dialogue {
+.character[data-character="action"]+.dialogue, .character[data-character="sound"]+.dialogue {
     font-style: oblique;
+}
+
+.character[data-character="sound"]+.dialogue {
+    text-align: center;
+}
+
+.character[data-character="sound"]+.dialogue::before, .character[data-character="sound"]+.dialogue::after {
+    /*content: " ♪ ";*/
+    /*content: ' \1f50a'; /* speaker with 3 waves */
+    content: '  \266a  '; /* musical eighth note */
 }

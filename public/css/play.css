@@ -13,7 +13,7 @@ body.hide {
 
 .slide {
     background-color: rgba(255,255,255,0.25); /* background color of all slides */
-    width: 800px; /* maximum width of all slides */
+    width: 500px; /* maximum width of all slides */
     margin: 0 auto; /* center div horizontally */
 
     display: none;
@@ -41,7 +41,7 @@ body.hide {
         font-variant: small-caps;
         text-transform: lowercase;
         opacity: 0.75;
-        background-color: red;
+        /*background-color: red;*/
         text-align: right;
         width: 90px;
 
@@ -50,8 +50,8 @@ body.hide {
 
     .line .dialogue {
         background-color: green;
-        max-width: 700px;
-        width: 700px;
+        max-width: 400px;
+        width: 400px;
 
         text-align: justify;
     }
