@@ -15,3 +15,11 @@
     /*content: ' \1f50a'; /* speaker with 3 waves */
     content: '  \266a  '; /* musical eighth note */
 }
+
+.character[data-character="title"] {
+    visibility: hidden;
+}
+
+.character[data-character="title"]+.dialogue {
+    font-size: 48px;
+}

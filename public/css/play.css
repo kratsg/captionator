@@ -49,9 +49,8 @@ body.hide {
     }
 
     .line .dialogue {
-        background-color: green;
         max-width: 400px;
         width: 400px;
 
-        text-align: justify;
+        text-align: center;
     }
