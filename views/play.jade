@@ -30,7 +30,7 @@ block content
                         div.clear
                 div.sourceCode
                     pre
-                        code.yaml= yaml.dump(item)
+                        code.yaml= yaml.dump([item])
             - slideIndex++
         else
             // item is multiple slides
@@ -48,6 +48,6 @@ block content
                             div.clear
                         div.sourceCode
                             pre
-                                code.yaml= yaml.dump(item)
+                                code.yaml= yaml.dump([item])
                     - slideIndex++
 
