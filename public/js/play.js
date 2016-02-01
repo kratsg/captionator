@@ -57,6 +57,7 @@
                      "[left], [up], [backspace] to move backward\n"+
                      "[b] to toggle the blank screen (changing slides hides me)\n"+
                      "[g r i d] to toggle the grid display (at 10px and 50px)\n"+
+                     "[s] to toggle the source code for the given slide\n"+
                      "[?] to show this dialog";
     Mousetrap.bind('?', function(){alert(helpScreen)});
 })();

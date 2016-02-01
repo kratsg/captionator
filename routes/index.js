@@ -29,4 +29,14 @@ router.get('/play/:playName/:currIndex', function(req, res, next) {
                        });
 });
 
+router.get('/source/:playName', function(req, res, next) {
+    res.render('source', {
+                          corpus: req.fs.readFileSync('./data/'+req.params.playName+'.yml'),
+                          playName: req.params.playName,
+                          title: req.params.playName.replace(/_/g, ' '),
+                          currIndex: req.params.currIndex,
+                          yaml: req.yaml
+                         });
+});
+
 module.exports = router;

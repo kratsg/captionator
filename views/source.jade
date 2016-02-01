@@ -1,0 +1,11 @@
+extends layout
+
+block header
+    link(rel='stylesheet', href='/css/color-brewer.css')
+    script(src='/js/highlight.pack.js')
+    script.
+        hljs.initHighlightingOnLoad();
+
+block content
+    pre
+        code.yaml= corpus
