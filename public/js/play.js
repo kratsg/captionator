@@ -10,7 +10,7 @@
         if(nextSlide && nextSlide.length){
             currSlide.removeClass('active');
             nextSlide.addClass('active');
-            pushState(nextSlide.index());
+            pushState(nextSlide.index('.slide'));
         }
         blankScreen('hide');
         return false;
@@ -22,7 +22,7 @@
         if(prevSlide && prevSlide.length){
             currSlide.removeClass('active');
             prevSlide.addClass('active');
-            pushState(prevSlide.index());
+            pushState(prevSlide.index('.slide'));
         }
         blankScreen('hide');
         return false;
