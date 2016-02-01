@@ -1,8 +1,13 @@
+html {
+    height: 100%;
+}
+
 body {
     font: 14px Tahoma, Verdana, Segoe, sans-serif;
     color: yellow;
     background-color: black;
 
+    height: 100%;
     opacity: 1.0;
     transition: opacity 0.5s ease-in-out;
 }
@@ -11,8 +16,28 @@ body.hide {
     opacity: 0.0;
 }
 
+#grid {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+
+    background-size: 10px 10px;
+    background-image:repeating-linear-gradient(0deg, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.5) 1px, transparent 1px, transparent 40px),repeating-linear-gradient(-90deg, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.5) 1px, transparent 1px, transparent 40px);
+
+    opacity: 0.0;
+    transition: opacity 0.5s ease-in-out;
+}
+
+body.grid #grid {
+    opacity: 1.0;
+}
+
+.clear {
+    clear: both;
+}
+
 .slide {
-    background-color: rgba(255,255,255,0.25); /* background color of all slides */
+    background-color: rgba(255,255,255,0.0); /* background color of all slides */
     width: 500px; /* maximum width of all slides */
     margin: 0 auto; /* center div horizontally */
 
@@ -41,7 +66,6 @@ body.hide {
         font-variant: small-caps;
         text-transform: lowercase;
         opacity: 0.75;
-        /*background-color: red;*/
         text-align: right;
         width: 90px;
 
@@ -54,3 +78,7 @@ body.hide {
 
         text-align: center;
     }
+
+.slide .line + .line {
+    margin-top: 15px;
+}

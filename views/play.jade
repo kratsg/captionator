@@ -10,6 +10,7 @@ block header
     script(src='/js/play.js')
 
 block content
+    div#grid
     - var slideIndex = 0
     each item in corpus
         if item instanceof Array
@@ -23,6 +24,7 @@ block content
                                 <!-- multiple lines for #{character} -->
                                 - dialogue = dialogue.join('<br/>')
                             div.dialogue!= dialogue
+                        div.clear
             - slideIndex++
         else
             // item is multiple slides
@@ -37,5 +39,6 @@ block content
                                 <!-- multiple lines for #{character} -->
                                 - dialogue = dialogue.join('<br/>')
                             div.dialogue!= dialogue
+                            div.clear
                     - slideIndex++
 

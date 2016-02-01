@@ -35,9 +35,14 @@
         if(method == 'show')   $('body').addClass('hide');
     };
 
+    var toggleGrid = function(){
+        $('body').toggleClass('grid');
+    };
+
     Mousetrap.bind(['right', 'down', 'space'], moveForward);
     Mousetrap.bind(['left', 'up', 'backspace'], moveBackward);
     Mousetrap.bind('b', function(){blankScreen('toggle');});
+    Mousetrap.bind('g r i d', toggleGrid);
 
     var helpScreen = "[right], [down], [spacebar] to move forward\n"+
                      "[left], [up], [backspace] to move backward\n"+
