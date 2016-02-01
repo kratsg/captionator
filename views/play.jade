@@ -18,7 +18,7 @@ block content
     each item in corpus
         if item instanceof Array
             // item is a single slide, iterate over it
-            div.slide(class=(slideIndex == currIndex ? "active" : undefined))##{slideIndex}
+            div.slide(class=(slideIndex == currIndex ? "active" : undefined))
                 each line in item
                     section.line
                         each dialogue, character in line
@@ -38,7 +38,7 @@ block content
                 unless lines instanceof Array
                     - lines = [lines]
                 each dialogue in lines
-                    div.slide(class=(slideIndex == currIndex ? "active" : undefined))##{slideIndex}
+                    div.slide(class=(slideIndex == currIndex ? "active" : undefined))
                         section.line
                             div.character(data-character=character.toLowerCase())= character
                             if dialogue instanceof Array
