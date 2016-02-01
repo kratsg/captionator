@@ -21,7 +21,7 @@ router.get('/play/:playName', function(req, res, next) {
 
 router.get('/play/:playName/:currIndex', function(req, res, next) {
     res.render('play', {
-                        corpus: req.yaml.load(req.fs.readFileSync('./data/'+req.params.playName+'.yml')),
+                        corpus: req.yaml.safeLoad(req.fs.readFileSync('./data/'+req.params.playName+'.yml')),
                         playName: req.params.playName,
                         title: req.params.playName.replace(/_/g, ' '),
                         currIndex: req.params.currIndex,

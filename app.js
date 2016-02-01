@@ -7,7 +7,7 @@ var bodyParser = require('body-parser');
 
 var routes = require('./routes/index');
 
-var yaml = require('yaml-js');
+var yaml = require('js-yaml');
 var fs = require('fs');
 
 var app = express();
