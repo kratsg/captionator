@@ -17,6 +17,15 @@ body.hide {
     opacity: 0.0;
 }
 
+/* to show and hide the code blocks */
+.sourceCode {
+    display: none;
+}
+
+body.showCode .sourceCode {
+    display: block;
+}
+
 /* This section controls the display of the grid */
 .gridElement {
     position: absolute;
@@ -104,3 +113,5 @@ body.hide {
 .slide .line + .line {
     margin-top: 15px;
 }
+
+
