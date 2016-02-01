@@ -39,10 +39,19 @@
         $('body').toggleClass('grid');
     };
 
+    var toggleCode = function(method){
+        if(typeof method == "undefined") method = 'toggle';
+        if(method == 'toggle') $('body').toggleClass('showCode');
+        if(method == 'hide')   $('body').removeClass('showCode');
+        if(method == 'show')   $('body').addClass('showCode');
+    };
+    hljs.initHighlightingOnLoad();
+
     Mousetrap.bind(['right', 'down', 'space'], moveForward);
     Mousetrap.bind(['left', 'up', 'backspace'], moveBackward);
     Mousetrap.bind('b', function(){blankScreen('toggle');});
     Mousetrap.bind('g r i d', toggleGrid);
+    Mousetrap.bind('s', function(){toggleCode('toggle');});
 
     var helpScreen = "[right], [down], [spacebar] to move forward\n"+
                      "[left], [up], [backspace] to move backward\n"+

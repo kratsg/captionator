@@ -1,12 +1,14 @@
 extends layout
 
 block header
+    link(rel='stylesheet', href='/css/dark.css')
     link(rel='stylesheet', href='/css/play.css')
     link(rel='stylesheet', href='/css/#{playName}.css')
     script.
         window.playName = "#{playName}";
     script(src='/js/mousetrap.min.js')
     script(src='/js/jquery-2.2.0.min.js')
+    script(src='/js/highlight.pack.js')
     script(src='/js/play.js')
 
 block content
@@ -16,7 +18,7 @@ block content
     each item in corpus
         if item instanceof Array
             // item is a single slide, iterate over it
-            div.slide(class=(slideIndex == currIndex ? "active" : undefined))
+            div.slide(class=(slideIndex == currIndex ? "active" : undefined))##{slideIndex}
                 each line in item
                     section.line
                         each dialogue, character in line
@@ -26,6 +28,9 @@ block content
                                 - dialogue = dialogue.join('<br/>')
                             div.dialogue!= dialogue
                         div.clear
+                div.sourceCode
+                    pre
+                        code.yaml= yaml.dump(item)
             - slideIndex++
         else
             // item is multiple slides
@@ -33,7 +38,7 @@ block content
                 unless lines instanceof Array
                     - lines = [lines]
                 each dialogue in lines
-                    div.slide(class=(slideIndex == currIndex ? "active" : undefined))
+                    div.slide(class=(slideIndex == currIndex ? "active" : undefined))##{slideIndex}
                         section.line
                             div.character(data-character=character.toLowerCase())= character
                             if dialogue instanceof Array
@@ -41,5 +46,8 @@ block content
                                 - dialogue = dialogue.join('<br/>')
                             div.dialogue!= dialogue
                             div.clear
+                        div.sourceCode
+                            pre
+                                code.yaml= yaml.dump(item)
                     - slideIndex++
 

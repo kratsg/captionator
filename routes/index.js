@@ -24,7 +24,8 @@ router.get('/play/:playName/:currIndex', function(req, res, next) {
                         corpus: req.yaml.safeLoad(req.fs.readFileSync('./data/'+req.params.playName+'.yml')),
                         playName: req.params.playName,
                         title: req.params.playName.replace(/_/g, ' '),
-                        currIndex: req.params.currIndex
+                        currIndex: req.params.currIndex,
+                        yaml: req.yaml
                        });
 });
 
