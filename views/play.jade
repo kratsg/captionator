@@ -10,7 +10,8 @@ block header
     script(src='/js/play.js')
 
 block content
-    div#grid
+    div.gridElement#gridMinor
+    div.gridElement#gridMajor
     - var slideIndex = 0
     each item in corpus
         if item instanceof Array

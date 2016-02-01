@@ -12,26 +12,48 @@ body {
     transition: opacity 0.5s ease-in-out;
 }
 
+/* hide the body when we want to */
 body.hide {
     opacity: 0.0;
 }
 
-#grid {
+/* This section controls the display of the grid */
+.gridElement {
     position: absolute;
     height: 100%;
     width: 100%;
-
-    background-size: 10px 10px;
-    background-image:repeating-linear-gradient(0deg, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.5) 1px, transparent 1px, transparent 40px),repeating-linear-gradient(-90deg, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.5) 1px, transparent 1px, transparent 40px);
-
+    top: 0;
+    left: 0;
     opacity: 0.0;
     transition: opacity 0.5s ease-in-out;
 }
 
-body.grid #grid {
+/* specify the delays so we can reverse the order appropriately */
+#gridMinor, .grid #gridMajor {
+    transition-delay: 0.4s;
+}
+
+.grid #gridMinor, #gridMajor {
+    transition-delay: 0s;
+}
+
+/* build the actual display of each grid, minor and major */
+#gridMinor {
+    background-size: 10px 10px;
+    background-image:repeating-linear-gradient(0deg, rgba(255, 255, 255, 0.25), rgba(255, 255, 255, 0.25) 1px, transparent 1px, transparent 10px),repeating-linear-gradient(-90deg, rgba(255, 255, 255, 0.25), rgba(255, 255, 255, 0.25) 1px, transparent 1px, transparent 10px);
+}
+
+#gridMajor {
+    background-size: 50px 50px;
+    background-image:repeating-linear-gradient(0deg, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.5) 1px, transparent 1px, transparent 50px),repeating-linear-gradient(-90deg, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.5) 1px, transparent 1px, transparent 50px);
+}
+
+/* show the grid elements when we want to */
+.grid .gridElement  {
     opacity: 1.0;
 }
 
+/* clearfix div */
 .clear {
     clear: both;
 }
