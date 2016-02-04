@@ -21,5 +21,22 @@
 }
 
 .character[data-character="title"]+.dialogue {
-    font-size: 48px;
+    font-size: 200%;
 }
+
+.slide {
+    margin: 0;
+}
+
+body {
+  font-size: 200%;
+  transform: rotate(-1deg);
+}
+
+    .line .dialogue {
+        max-width: 650px;
+        width: 650px;
+
+        text-align: center;
+    }
+
