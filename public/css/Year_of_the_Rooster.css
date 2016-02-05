@@ -10,10 +10,19 @@
     text-align: center;
 }
 
-.character[data-character="sound"]+.dialogue::before, .character[data-character="sound"]+.dialogue::after {
+.character[data-character="sound"]+.dialogue::before {
     /*content: " ♪ ";*/
     /*content: ' \1f50a'; /* speaker with 3 waves */
-    content: '  \266a  '; /* musical eighth note */
+    /*content: '  \266a  '; /* musical eighth note */
+    content: '(';
+}
+
+
+.character[data-character="sound"]+.dialogue::after {
+    /*content: " ♪ ";*/
+    /*content: ' \1f50a'; /* speaker with 3 waves */
+    /*content: '  \266a  '; /* musical eighth note */
+    content: ')';
 }
 
 .character[data-character="title"] {
