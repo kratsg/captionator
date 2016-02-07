@@ -39,4 +39,8 @@ router.get('/source/:playName', function(req, res, next) {
                          });
 });
 
+router.get('/download/:playName', function(req, res, next) {
+    res.download('./data/'+req.params.playName+'.yml');
+});
+
 module.exports = router;
