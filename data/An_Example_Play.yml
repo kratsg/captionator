@@ -1,0 +1,21 @@
+- title: "A really stupid simple play"
+- ALICE: "Only line in the slide."
+- BOB:
+    - "Talks quite a bit."
+    - "But daaayyyyum."
+-
+    - ALICE: "Hey there. I'm Alice."
+    - BOB: "Hiya, I'm Bobby."
+    - sound: "dun dun dunnnnn"
+- ALICE:
+    -
+        - "Did you just hear that?"
+        - "That was really strange."
+- BOB:
+    - ["Hear what?", "I'm <b>Deaf</b>."]
+-
+    - sound: "audible gasps are heard"
+    - ALICE: ["You?", "You're Deaf?"]
+    - BOB:
+        - "Yessirree."
+        - "Like Lady Gaga I was <i>born this way</i>."
