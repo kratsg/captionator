@@ -1,21 +1,33 @@
+# format is always `- character: "line in slide"`
+# sometimes you want special characters, like title.. or sound... or action...
 - title: "A really stupid simple play"
 - ALICE: "Only line in the slide."
+# and other times, you have a character that speaks for a while, so you need multiple slides
 - BOB:
     - "Talks quite a bit."
     - "But daaayyyyum."
+# or multiple characters speak on the same slide
 -
     - ALICE: "Hey there. I'm Alice."
     - BOB: "Hiya, I'm Bobby."
     - sound: "dun dun dunnnnn"
+# or you need to have multiple lines on a single slide for a character
 - ALICE:
     -
         - "Did you just hear that?"
         - "That was really strange."
+    - "I'm certain I'm not hallucinating."
+# and this is another way to specify multiple lines on a single slide
 - BOB:
     - ["Hear what?", "I'm <b>Deaf</b>."]
+# and you can see both of them in action with multiple characters, multiple lines, single slide
 -
     - sound: "audible gasps are heard"
     - ALICE: ["You?", "You're Deaf?"]
     - BOB:
         - "Yessirree."
         - "Like Lady Gaga I was <i>born this way</i>."
+# and if the character has a space in their name, you need to put double-quotes around them
+-
+    - "LADY GAGA": "Well you can bite me baby I was born this way"
+    - "WEIRD AL": "I may be covered with bees..."
