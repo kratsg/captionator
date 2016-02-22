@@ -4,6 +4,8 @@ block header
     link(rel='stylesheet', href='/css/dark.css')
     link(rel='stylesheet', href='/css/play.css')
     link(rel='stylesheet', href='/css/#{playName}.css')
+    if !client
+        script(src='/css/#{playName}Control.css')
     script.
         window.playName = "#{playName}";
     script(src='/js/mousetrap.min.js')
