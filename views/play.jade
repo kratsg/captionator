@@ -9,7 +9,13 @@ block header
     script(src='/js/mousetrap.min.js')
     script(src='/js/jquery-2.2.0.min.js')
     script(src='/js/highlight.pack.js')
+    script.
+        socket.on('connect', function(){
+            socket.emit('subscribe', playName);
+        });
     script(src='/js/play.js')
+    if !client
+        script(src='/js/playControl.js')
 
 block content
     div.gridElement#gridMinor

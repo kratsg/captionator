@@ -1,4 +1,4 @@
-(function(){
+var play = (function(){
     var playTitle = window.playName.replace(/_/g, ' ');
     var pushState = function(index){
         history.pushState({}, playTitle+": slide "+index, index);
@@ -47,17 +47,18 @@
     };
     hljs.initHighlightingOnLoad();
 
-    Mousetrap.bind(['right', 'down', 'space'], moveForward);
-    Mousetrap.bind(['left', 'up', 'backspace'], moveBackward);
-    Mousetrap.bind('b', function(){blankScreen('toggle');});
-    Mousetrap.bind('g r i d', toggleGrid);
-    Mousetrap.bind('s', function(){toggleCode('toggle');});
+    socket.emit('connect viewer', {});
+    socket.on('move forward', moveForward);
+    socket.on('move backward', moveBackward);
+    socket.on('toggle blank screen', function(){blankScreen('toggle');});
+    socket.on('toggle grid', toggleGrid);
+    socket.on('toggle source code', function(){toggleCode('toggle');});
 
-    var helpScreen = "[right], [down], [spacebar] to move forward\n"+
-                     "[left], [up], [backspace] to move backward\n"+
-                     "[b] to toggle the blank screen (changing slides hides me)\n"+
-                     "[g r i d] to toggle the grid display (at 10px and 50px)\n"+
-                     "[s] to toggle the source code for the given slide\n"+
-                     "[?] to show this dialog";
-    Mousetrap.bind('?', function(){alert(helpScreen)});
+    return {
+        moveForward: moveForward,
+        moveBackward: moveBackward,
+        blankScreen: blankScreen,
+        toggleGrid: toggleGrid,
+        toggleCode: toggleCode
+    };
 })();
