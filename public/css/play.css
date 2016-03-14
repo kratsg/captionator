@@ -69,8 +69,7 @@ body.showCode .sourceCode {
 
 .slide {
     background-color: rgba(255,255,255,0.0); /* background color of all slides */
-    width: 1000px; /* maximum width of all slides */
-    margin: 0 auto; /* center div horizontally */
+    width: 800px; /* maximum width of all slides */
 
     display: none;
 }
@@ -104,10 +103,10 @@ body.showCode .sourceCode {
     }
 
     .line .dialogue {
-        max-width: 750px;
-        width: 750px;
+        max-width: 600px;
+        width: 600px;
 
-        text-align: center;
+        text-align: left;
     }
 
 .slide .line + .line {
