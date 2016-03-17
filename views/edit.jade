@@ -1,0 +1,50 @@
+extends layout
+
+block header
+    link(rel='stylesheet', href='/css/color-brewer.css')
+    script(src='/js/highlight.pack.js')
+    script.
+        hljs.initHighlightingOnLoad();
+
+    // Firebase
+    script(src='https://cdn.firebase.com/js/client/2.3.2/firebase.js')
+    // ACE and its JavaScript mode and theme files
+    script(src='https://cdnjs.cloudflare.com/ajax/libs/ace/1.2.2/ace.js')
+    script(src='https://cdnjs.cloudflare.com/ajax/libs/ace/1.2.2/mode-javascript.js')
+    script(src='https://cdnjs.cloudflare.com/ajax/libs/ace/1.2.2/theme-textmate.js')
+    // Firepad
+    link(rel='stylesheet' href='https://cdn.firebase.com/libs/firepad/1.3.0/firepad.css')
+    script(src='https://cdn.firebase.com/libs/firepad/1.3.0/firepad.min.js')
+
+
+block content
+    div#firepad-container
+
+    - console.log(typeof(corpus))
+    - corpusEscaped = corpus.replace("'", "\\'")
+
+    style.
+        #firepad-container {
+          width: 800px;
+          height: 400px;
+        }
+
+
+    script.
+        var init = function() {
+            var firepadRef = new Firebase('https://captionator.firebaseio.com/');
+            firepadRef = firepadRef.child('#{playName}');
+            console.log('Firebase data: ', firepadRef.toString());
+            // Create ACE
+            var editor = ace.edit("firepad-container");
+            editor.setTheme("ace/theme/textmate");
+            var session = editor.getSession();
+            session.setUseWrapMode(true);
+            session.setUseWorker(false);
+            session.setMode("ace/mode/javascript");
+            // Create Firepad.
+            var firepad = Firepad.fromACE(firepadRef, editor, {
+                defaultText: `!{corpus}`
+            });
+        }
+        window.onload = init;
