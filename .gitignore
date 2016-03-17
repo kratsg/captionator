@@ -34,3 +34,8 @@ node_modules
 
 # data directory containing the script in yml format
 data/
+
+# things that should be protected and private
+config/auth.js
+config/passport.js
+config/keys.js
