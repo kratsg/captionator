@@ -1,3 +1,5 @@
+var config = require('./config');
+
 var express = require('express');
 var path = require('path');
 var favicon = require('serve-favicon');
@@ -11,6 +13,17 @@ var yaml = require('js-yaml');
 var fs = require('fs');
 
 var app = express();
+
+
+// Configuring Passport
+var passport = require('passport');
+var expressSession = require('express-session');
+app.use(expressSession({secret: config.keys.expressSession}));
+app.use(passport.initialize());
+app.use(passport.session());
+
+var passportConfig = require('./config/passport');
+passportConfig(passport);
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -27,6 +40,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(function(req, res, next){
     req.yaml = yaml;
     req.fs = fs;
+    res.locals = {user: req.user};
     next();
 });
 
