@@ -6,4 +6,7 @@ block header
 block content
     ul
         each play in plays
-            li #[a(href="/play/#{play}")= play] [#[a(href="/source/#{play}") source]]
+            if locals.user
+              li #[a(href="/play/#{play}/0")= play] [#[a(href="/source/#{play}") source]]
+            else
+              li #[a(href="/watch/#{play}/0")= play]
