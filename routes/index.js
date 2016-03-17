@@ -45,10 +45,6 @@ router.get('/plays', function(req, res, next) {
     });
 });
 
-router.get('/play/:playName', isLoggedIn, function(req, res, next) {
-    res.redirect('/play/'+req.params.playName+'/0');
-});
-
 /*
     To make our life easier, we will render the same page (play.jade) with extra JS depending on whether or not the person rendering it is a cuer (leader) or client (watcher).
 */
