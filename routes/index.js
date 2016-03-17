@@ -16,6 +16,11 @@ router.get('/auth/facebook/callback',
     })
 );
 
+app.get('/logout', function(req, res){
+  req.logout();
+  res.redirect('/');
+});
+
 /* GET home page. */
 router.get('/', function(req, res, next) {
   res.render('index', { title: 'Captionator' });
