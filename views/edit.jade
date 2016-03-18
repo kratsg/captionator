@@ -34,9 +34,17 @@ block content
         var init = function() {
             var firepadRef = new Firebase('https://captionator.firebaseio.com/');
             firepadRef = firepadRef.child('#{playName}');
+            firepadRef.authWithCustomToken("#{firebaseToken}", function(err, authData){
+                if(err){
+                    console.log("Login Failed!", err);
+                } else {
+                    console.log("Login Succeeded!", authData);
+                }
+            });
             console.log('Firebase data: ', firepadRef.toString());
             // Create ACE
             var editor = ace.edit("firepad-container");
+            editor.$blockScrolling = Infinity; // stop warnings
             editor.setTheme("ace/theme/twilight");
             var session = editor.getSession();
             session.setUseWrapMode(true);

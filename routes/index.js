@@ -2,6 +2,10 @@ var express = require('express');
 var passport = require('passport');
 var router = express.Router();
 
+var config = require('../config')
+var FirebaseTokenGenerator = require('firebase-token-generator');
+var tokenGenerator = new FirebaseTokenGenerator(config.auth.firebase.secret);
+
 /* Authentication Sessions */
 
 // route middleware to make sure a user is logged in
@@ -90,7 +94,8 @@ router.get('/edit/:playName', function(req, res, next) {
                           playName: req.params.playName,
                           title: req.params.playName.replace(/_/g, ' '),
                           currIndex: req.params.currIndex,
-                          yaml: req.yaml
+                          yaml: req.yaml,
+                          firebaseToken: tokenGenerator.createToken({uid:"admin"})
                          });
 });
 
