@@ -52,7 +52,8 @@ block content
             session.setMode("ace/mode/yaml");
             // Create Firepad.
             var firepad = Firepad.fromACE(firepadRef, editor, {
-                defaultText: `!{corpus}`
+                defaultText: `!{corpus.replace(/\\/g,'\\\\').replace(/`/g,'\\`')}`
             });
+
         }
         window.onload = init;
