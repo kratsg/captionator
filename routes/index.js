@@ -23,7 +23,7 @@ router.get('/auth/facebook',
 
 router.get('/auth/facebook/callback',
     passport.authenticate('facebook', {
-        successRedirect: '/plays',
+        successRedirect: '/',
         failureRedirect: '/',
         failureFlash: true,
         display: 'popup' // not using javascript SDK
