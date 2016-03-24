@@ -21,6 +21,7 @@ module.exports = function(firebaseRef, callback){
         console.log('Updating a play: ', playName);
         var headless = new firepad.Headless(snapshot.ref());
         headless.getText(function(text){
+            headless.dispose(); // don't need it anymore
             callback(playName, text);
         });
     };
