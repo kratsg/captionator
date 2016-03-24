@@ -1,0 +1,7 @@
+// use this when we need to update firepad text again to fix shit
+            /*
+            firepad.on('ready', function(){
+              firepad.setText(`!{corpus.replace(/\\/g,'\\\\').replace(/`/g,'\\`')}`);
+            });
+            */
+

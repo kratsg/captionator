@@ -2,6 +2,10 @@ var express = require('express');
 var passport = require('passport');
 var router = express.Router();
 
+var config = require('../config')
+var FirebaseTokenGenerator = require('firebase-token-generator');
+var tokenGenerator = new FirebaseTokenGenerator(config.auth.firebase.secret);
+
 /* Authentication Sessions */
 
 // route middleware to make sure a user is logged in
@@ -50,7 +54,7 @@ router.get('/plays', function(req, res, next) {
 */
 router.get('/play/:playName/:currIndex', isLoggedIn, function(req, res, next) {
     res.render('play', {
-                        corpus: req.yaml.safeLoad(req.fs.readFileSync('./data/'+req.params.playName+'.yml')),
+                        corpus: req.yaml.safeLoad(req.fs.readFileSync('./data/'+req.params.playName+'.yml','utf8')),
                         playName: req.params.playName,
                         title: req.params.playName.replace(/_/g, ' '),
                         currIndex: req.params.currIndex,
@@ -61,7 +65,7 @@ router.get('/play/:playName/:currIndex', isLoggedIn, function(req, res, next) {
 
 router.get('/watch/:playName/:currIndex', function(req, res, next) {
     res.render('play', {
-                        corpus: req.yaml.safeLoad(req.fs.readFileSync('./data/'+req.params.playName+'.yml')),
+                        corpus: req.yaml.safeLoad(req.fs.readFileSync('./data/'+req.params.playName+'.yml','utf8')),
                         playName: req.params.playName,
                         title: req.params.playName.replace(/_/g, ' '),
                         currIndex: req.params.currIndex,
@@ -72,7 +76,7 @@ router.get('/watch/:playName/:currIndex', function(req, res, next) {
 
 router.get('/source/:playName', isLoggedIn, function(req, res, next) {
     res.render('source', {
-                          corpus: req.fs.readFileSync('./data/'+req.params.playName+'.yml'),
+                          corpus: req.fs.readFileSync('./data/'+req.params.playName+'.yml','utf8'),
                           playName: req.params.playName,
                           title: req.params.playName.replace(/_/g, ' '),
                           currIndex: req.params.currIndex,
@@ -82,6 +86,17 @@ router.get('/source/:playName', isLoggedIn, function(req, res, next) {
 
 router.get('/download/:playName', isLoggedIn, function(req, res, next) {
     res.download('./data/'+req.params.playName+'.yml');
+});
+
+router.get('/edit/:playName', function(req, res, next) {
+    res.render('edit', {
+                          corpus: req.fs.readFileSync('./data/'+req.params.playName+'.yml','utf8'),
+                          playName: req.params.playName,
+                          title: req.params.playName.replace(/_/g, ' '),
+                          currIndex: req.params.currIndex,
+                          yaml: req.yaml,
+                          firebaseToken: tokenGenerator.createToken({uid:"admin"})
+                         });
 });
 
 module.exports = router;
