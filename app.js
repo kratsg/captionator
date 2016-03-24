@@ -21,9 +21,14 @@ var expressSession = require('express-session');
 app.use(expressSession({secret: config.keys.expressSession}));
 app.use(passport.initialize());
 app.use(passport.session());
+require('./config/passport')(passport);
 
-var passportConfig = require('./config/passport');
-passportConfig(passport);
+var Firebase = require('firebase');
+var firebaseRef = new Firebase(config.auth.firebase.project);
+require('./config/firebase')(firebaseRef, function(playName, text){
+    console.log('Writing a play: ', playName);
+    fs.writeFileSync('./data/'+playName+'.yml',text);
+});
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
