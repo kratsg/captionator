@@ -88,7 +88,7 @@ router.get('/download/:playName', isLoggedIn, function(req, res, next) {
     res.download('./data/'+req.params.playName+'.yml');
 });
 
-router.get('/edit/:playName', function(req, res, next) {
+router.get('/edit/:playName', isLoggedIn, function(req, res, next) {
     res.render('edit', {
                           corpus: req.fs.readFileSync('./data/'+req.params.playName+'.yml','utf8'),
                           playName: req.params.playName,
