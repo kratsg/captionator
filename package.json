@@ -19,6 +19,7 @@
     "jade": "~1.11.0",
     "js-yaml": "~3.5.2",
     "jsonwebtoken": "^5.7.0",
+    "jsonschema": "^1.1.0",
     "morgan": "~1.6.1",
     "passport": "^0.3.2",
     "passport-facebook": "^2.1.0",

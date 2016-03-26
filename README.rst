@@ -34,3 +34,10 @@ and we are good to go. We will probably incorporate forever::
 and then run::
 
     forever start --minUptime 1000 --spinSleepTime 1000 ./bin/www
+
+yamlvalidator.js
+----------------
+
+I used browserify::
+
+    browserify public/js/index.js > public/js/yamlvalidator.js
