@@ -15,10 +15,15 @@ block header
     // Firepad
     link(rel='stylesheet' href='https://cdn.firebase.com/libs/firepad/1.3.0/firepad.css')
     script(src='https://cdn.firebase.com/libs/firepad/1.3.0/firepad.min.js')
+<<<<<<< 36648a324c7f32d587c66ae3dec761144ff3df3f
     // Userlist
     link(rel='stylesheet', href='/css/firepad_userlist.css')
     script(src='/js/firepad_userlist.js')
 
+=======
+    script(src='/js/ajv.min.js')
+    script(src='/js/yaml.min.js')
+>>>>>>> add ajv and yaml. it works. time to get the worker for ace set up
 
 block content
     #userlist
@@ -38,6 +43,11 @@ block content
 
     script.
         var init = function() {
+            // set up our schema validator first
+            var ajv = Ajv();
+            var schema = JSON.parse(`!{schema}`);
+            var validate = ajv.compile(schema);
+
             var firepadRef = new Firebase('https://captionator.firebaseio.com/');
             firepadRef = firepadRef.child('#{playName}');
             firepadRef.authWithCustomToken("#{firebaseToken}", function(err, authData){
@@ -66,6 +76,12 @@ block content
 
             var firepadUserList = FirepadUserList.fromDiv(firepadRef.child('users'),
                 document.getElementById('userlist'), userId, displayName);
+
+            firepad.on('ready', function(){
+                var parsedText = YAML.parse(firepad.getText());
+                var isValid = validate(parsedText);
+                console.log(validate.errors);
+            });
 
         }
         window.onload = init;
