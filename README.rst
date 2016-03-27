@@ -35,9 +35,21 @@ and then run::
 
     forever start --minUptime 1000 --spinSleepTime 1000 ./bin/www
 
-yamlvalidator.js
-----------------
+ajv
+---
 
-I used browserify::
+To get this file::
 
-    browserify public/js/index.js > public/js/yamlvalidator.js
+    git clone epoberezkin/ajv
+    cd ajv
+    npm install
+    npm bundle run
+
+and inside the ``dist/`` folder is the output you need
+
+yaml
+----
+
+To get this file, I just did::
+
+    wget https://raw.githubusercontent.com/jeremyfa/yaml.js/develop/dist/yaml.min.js -O public/js/yaml.min.js
