@@ -89,4 +89,14 @@ at the very top (or near it). These are the minimized files I had mentioned abov
     <script type="text/javascript" src="/js/ajv.min.js"></script>
     <script type="text/javascript" src="/js/yaml.min.js"></script>
 
-in a normal HTML file. This is how we load custom libraries into the Web Worker correctly.
+in a normal HTML file. This is how we load custom libraries into the Web Worker correctly. The following web resources were indubitably helpful in figuring out how to do this:
+
+- https://github.com/ajaxorg/ace/wiki/Creating-or-Extending-an-Edit-Mode
+- https://ace.c9.io/#nav=higlighter
+- https://github.com/ajaxorg/ace/issues/895#issuecomment-20208600
+- https://github.com/ajaxorg/ace/blob/master/lib/ace/mode/yaml.js
+- https://github.com/ajaxorg/ace/blob/master/lib/ace/mode/javascript.js
+- https://github.com/ajaxorg/ace/blob/master/lib/ace/mode/javascript_worker.js
+- https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API/Using_web_workers#Importing_scripts_and_libraries
+- http://stackoverflow.com/questions/16310091/importscripts-web-workers
+- http://stackoverflow.com/questions/30974520/how-to-integrate-syntax-check-in-ace-editor-using-custom-mode
