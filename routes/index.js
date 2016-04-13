@@ -22,7 +22,7 @@ var isLoggedIn = function (req, res, next) {
 };
 
 router.get('/auth/facebook',
-    passport.authenticate('facebook')
+    passport.authenticate('facebook', {scope: ['public_profile']})
 );
 
 router.get('/auth/facebook/callback',
