@@ -17,6 +17,9 @@ var isLoggedIn = function (req, res, next) {
     // if user is authenticated in the session, carry on
     if (req.isAuthenticated()) return next();
 
+    // development only
+    if(process.env.NODE_ENV == 'development') return next();
+
     // if they aren't redirect them to the home page
     res.redirect('/');
 };
@@ -106,7 +109,8 @@ router.get('/edit/:playName', isLoggedIn, function(req, res, next) {
                               title: req.params.playName.replace(/_/g, ' '),
                               currIndex: req.params.currIndex,
                               yaml: req.yaml,
-                              firebaseToken: tokenGenerator.createToken({uid:"admin"})
+                              firebaseToken: tokenGenerator.createToken({uid:"admin"}),
+                              schema: JSON.stringify(require('../public/js/schema/play.json'))
                              });
     };
 
