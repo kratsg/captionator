@@ -15,20 +15,25 @@ block header
     // Firepad
     link(rel='stylesheet' href='https://cdn.firebase.com/libs/firepad/1.3.0/firepad.css')
     script(src='https://cdn.firebase.com/libs/firepad/1.3.0/firepad.min.js')
+    // Userlist
+    link(rel='stylesheet', href='/css/firepad_userlist.css')
+    script(src='/js/firepad_userlist.js')
 
 
 block content
-    div#firepad-container
-
-    - console.log(typeof(corpus))
-    - corpusEscaped = corpus.replace("'", "\\'")
+    #userlist
+    #firepad-container
 
     style.
         #firepad-container {
           width: 100%;
           height: 600px;
         }
-
+        #userlist {
+            position: relative;
+            width: 100%;
+            height: 100px;
+        }
 
     script.
         var init = function() {
@@ -51,9 +56,14 @@ block content
             session.setUseWorker(true);
             session.setMode("ace/mode/yaml");
             // Create Firepad.
+            var userId = '#{locals.user.id}';
+            var displayName = '#{locals.user.displayName}';
             var firepad = Firepad.fromACE(firepadRef, editor, {
-                defaultText: `!{corpus.replace(/\\/g,'\\\\').replace(/`/g,'\\`')}`
+                userId: userId
             });
+
+            var firepadUserList = FirepadUserList.fromDiv(firepadRef.child('users'),
+                document.getElementById('userlist'), userId, displayName);
 
         }
         window.onload = init;
