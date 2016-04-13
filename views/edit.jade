@@ -18,17 +18,18 @@ block header
 
 
 block content
-    div#firepad-container
-
-    - console.log(typeof(corpus))
-    - corpusEscaped = corpus.replace("'", "\\'")
+    #firepad-container
+    #userlist
 
     style.
         #firepad-container {
           width: 100%;
           height: 600px;
         }
-
+        #userlist {
+            width: 100%;
+            height: 100px;
+        }
 
     script.
         var init = function() {
@@ -52,7 +53,7 @@ block content
             session.setMode("ace/mode/yaml");
             // Create Firepad.
             var firepad = Firepad.fromACE(firepadRef, editor, {
-                defaultText: `!{corpus.replace(/\\/g,'\\\\').replace(/`/g,'\\`')}`
+                userId: #{locals.user.id}
             });
 
         }
