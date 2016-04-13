@@ -6,6 +6,10 @@ var config = require('../config')
 var FirebaseTokenGenerator = require('firebase-token-generator');
 var tokenGenerator = new FirebaseTokenGenerator(config.auth.firebase.secret);
 
+// this is for checking what plays exist, for example
+var Firebase = require('firebase');
+var firebaseRef = new Firebase(config.auth.firebase.project);
+
 /* Authentication Sessions */
 
 // route middleware to make sure a user is logged in
@@ -89,14 +93,35 @@ router.get('/download/:playName', isLoggedIn, function(req, res, next) {
 });
 
 router.get('/edit/:playName', isLoggedIn, function(req, res, next) {
-    res.render('edit', {
-                          corpus: req.fs.readFileSync('./data/'+req.params.playName+'.yml','utf8'),
-                          playName: req.params.playName,
-                          title: req.params.playName.replace(/_/g, ' '),
-                          currIndex: req.params.currIndex,
-                          yaml: req.yaml,
-                          firebaseToken: tokenGenerator.createToken({uid:"admin"})
-                         });
+    // we assume the file exists
+    var corpus = req.fs.readFileSync('./data/'+req.params.playName+'.yml','utf8');
+
+    var renderCallback = function(){
+        res.render('edit', {
+                              playName: req.params.playName,
+                              title: req.params.playName.replace(/_/g, ' '),
+                              currIndex: req.params.currIndex,
+                              yaml: req.yaml,
+                              firebaseToken: tokenGenerator.createToken({uid:"admin"})
+                             });
+    };
+
+    // first check to see if we've set it up in firebase yet, if we haven't, start it up
+    firebaseRef.authWithCustomToken(tokenGenerator.createToken({uid:"admin"}));
+    firebaseRef.child(req.params.playName).once("value", function(snapshot){
+        // need to make a headless and set the text first
+        if(!snapshot.exists()){
+            var firepad = require('firepad');
+            var playName = snapshot.key();
+            var headless = new firepad.Headless(snapshot.ref());
+            headless.setText(corpus, function(err, committed){
+                headless.dispose(); // don't need it anymore
+                renderCallback();
+            });
+        } else {
+            renderCallback();
+        }
+    })
 });
 
 module.exports = router;
