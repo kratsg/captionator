@@ -18,7 +18,7 @@ var app = express();
 // Configuring Passport
 var passport = require('passport');
 var expressSession = require('express-session');
-var sessionconfigs = config.services.session.express;
+var sessionConfigs = config.services.session.express;
 if(app.get('env') === 'production') {
     var FirebaseStore = require('connect-firebase')(expressSession);
     sessionConfigs.store = new FirebaseStore(config.services.session.firebase);
@@ -31,7 +31,7 @@ app.use(passport.session());
 require('./services/passport')(passport);
 
 var Firebase = require('firebase');
-var firebaseRef = new Firebase(config.auth.firebase.project);
+var firebaseRef = new Firebase(config.services.firebase.project);
 require('./config/firebase')(firebaseRef, function(playName, text){
     console.log('Writing a play: ', playName);
     fs.writeFileSync('./data/'+playName+'.yml',text);

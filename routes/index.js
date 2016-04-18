@@ -4,11 +4,11 @@ var router = express.Router();
 
 var config = require('../config')
 var FirebaseTokenGenerator = require('firebase-token-generator');
-var tokenGenerator = new FirebaseTokenGenerator(config.auth.firebase.secret);
+var tokenGenerator = new FirebaseTokenGenerator(config.services.firebase.secret);
 
 // this is for checking what plays exist, for example
 var Firebase = require('firebase');
-var firebaseRef = new Firebase(config.auth.firebase.project);
+var firebaseRef = new Firebase(config.services.firebase.project);
 
 /* Authentication Sessions */
 
