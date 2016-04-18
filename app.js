@@ -49,10 +49,14 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+var jwt = require('jsonwebtoken');
+
 app.use(function(req, res, next){
     req.yaml = yaml;
     req.fs = fs;
-    res.locals = {user: req.user, url: req.url};
+    res.locals.user = req.user;
+    res.locals.url = req.url;
+    res.locals.jwt = jwt.sign({user: req.user}, config.services.jwt.secret, {expiresIn: 60*5});
     next();
 });
 

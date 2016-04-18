@@ -16,5 +16,8 @@ module.exports = {
             host: '<YOUR-FIREBASE-SESSIONS-PROJECT>.firebaseio.com'
             token: 'your-firebase-secret-here'
         }
+    },
+    jwt: {
+        secret: (typeof process.env.JWT_SECRET === 'undefined') ? 'secret' : process.env.JWT_SECRET
     }
 };
