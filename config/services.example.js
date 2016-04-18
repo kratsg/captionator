@@ -7,5 +7,14 @@ module.exports = {
     firebase: {
         project: 'https://<YOUR-FIREBASE-PROJECT>.firebaseio.com/',
         secret: 'your-firebase-secret-here'
+    },
+    session: {
+        express: {
+            secret: (typeof process.env.EXPRESSSESSION_SECRET === 'undefined') ? 'secret' : process.env.EXPRESSSESSION_SECRET
+        },
+        firebase: {
+            host: '<YOUR-FIREBASE-SESSIONS-PROJECT>.firebaseio.com'
+            token: 'your-firebase-secret-here'
+        }
     }
 };
