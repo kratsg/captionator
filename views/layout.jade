@@ -40,36 +40,31 @@ html
                 a.navbar-brand(href='/') #[i.fa.fa-cc] Captionator
             #navbar.navbar-collapse.collapse
                 ul.nav.navbar-nav.navbar-right
+                    li
+                        a(href='/help') Help
                     if locals.user
-                        li
-                            a(href="/logout") Logout
                         li
                             a(href='/me')= locals.user.displayName
                         li
-                            a(href='/help') Help
+                            a(href="/logout") Logout
                     else
                         li
                             a(href="/auth/facebook") #[i.fa.fa-facebook] Login with Facebook
-                form.navbar-form.navbar-right
-                    input.form-control(type='text', placeholder='Plays...')
 
     - console.log(locals)
 
     // below navbar
     .container-fluid
         .row
-            if locals.user
-                // left nav bar
-                .col-sm-3.col-md-2.sidebar
-                    ul.nav.nav-sidebar
-                        li(class=(locals.url==='/' ? 'active' : ''))
-                            a(href='/')
-                                | Home
-                                span.sr-only (current)
-                        li(class=(locals.url==='/plays' ? 'active' : ''))
-                            a(href='plays')
-                                | Plays
-                                span.sr-only (current)
+            // left nav bar
+            .col-sm-3.col-md-2.sidebar
+                ul.nav.nav-sidebar
+                    li(class=(locals.url==='/' ? 'active' : ''))
+                        a(href='/')
+                            | Home
+                    li(class=(locals.url==='/plays' ? 'active' : ''))
+                        a(href='plays')
+                            | Plays
 
             // right side (main content)
             .col-sm-9.col-sm-offset-3.col-md-10.col-md-offset-2.main
