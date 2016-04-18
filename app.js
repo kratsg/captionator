@@ -45,7 +45,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(function(req, res, next){
     req.yaml = yaml;
     req.fs = fs;
-    res.locals = {user: req.user};
+    res.locals = {user: req.user, url: req.url};
     next();
 });
 
