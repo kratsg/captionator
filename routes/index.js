@@ -53,7 +53,7 @@ router.get('/plays', function(req, res, next) {
         if(err) throw err;
         plays = plays.filter(function(play){ return play.substr((~-play.lastIndexOf(".") >>> 0)+2) == "yml"; })
                      .map(function(play){ return play.replace('.yml', '') });
-        res.render('plays', {plays: plays});
+        res.render('plays', {title: 'Plays', plays: plays});
     });
 });
 
