@@ -1,6 +1,20 @@
-extends layout
+doctype html
+html
+  head
+    title= title
 
-block header
+    link(rel='stylesheet', href='/css/normalize.css')
+    script(src='/socket.io/socket.io.js')
+
+    script.
+        var socket = io.connect();
+        socket.on('connect', function() {
+            console.log('connected socket');
+        });
+        socket.on('disconnect', function() {
+            console.log('disconnected socket');
+        });
+
     link(rel='stylesheet', href='/css/dark.css')
     link(rel='stylesheet', href='/css/play.css')
     link(rel='stylesheet', href='/css/#{playName}.css')
@@ -19,43 +33,42 @@ block header
     if !client
         script(src='/js/playControl.js')
 
-block content
-    div.gridElement#gridMinor
-    div.gridElement#gridMajor
-    - var slideIndex = 0
-    each item in corpus
-        if item instanceof Array
-            // item is a single slide, iterate over it
-            div.slide(class=(slideIndex == currIndex ? "active" : undefined))
-                each line in item
-                    section.line
-                        each dialogue, character in line
-                            div.character(data-character=character.toLowerCase())= character
-                            if dialogue instanceof Array
-                                <!-- multiple lines for #{character} -->
-                                - dialogue = dialogue.join('<br/>')
-                            div.dialogue!= dialogue
-                        div.clear
-                div.sourceCode
-                    pre
-                        code.yaml= yaml.dump(item)
-            - slideIndex++
-        else
-            // item is multiple slides
-            each lines, character in item
-                unless lines instanceof Array
-                    - lines = [lines]
-                each dialogue in lines
-                    div.slide(class=(slideIndex == currIndex ? "active" : undefined))
+    body
+        div.gridElement#gridMinor
+        div.gridElement#gridMajor
+        - var slideIndex = 0
+        each item in corpus
+            if item instanceof Array
+                // item is a single slide, iterate over it
+                div.slide(class=(slideIndex == currIndex ? "active" : undefined))
+                    each line in item
                         section.line
-                            div.character(data-character=character.toLowerCase())= character
-                            if dialogue instanceof Array
-                                <!-- multiple lines for #{character} -->
-                                - dialogue = dialogue.join('<br/>')
-                            div.dialogue!= dialogue
+                            each dialogue, character in line
+                                div.character(data-character=character.toLowerCase())= character
+                                if dialogue instanceof Array
+                                    <!-- multiple lines for #{character} -->
+                                    - dialogue = dialogue.join('<br/>')
+                                div.dialogue!= dialogue
                             div.clear
-                        div.sourceCode
-                            pre
-                                code.yaml= yaml.dump([item])
-                    - slideIndex++
-
+                    div.sourceCode
+                        pre
+                            code.yaml= yaml.dump(item)
+                - slideIndex++
+            else
+                // item is multiple slides
+                each lines, character in item
+                    unless lines instanceof Array
+                        - lines = [lines]
+                    each dialogue in lines
+                        div.slide(class=(slideIndex == currIndex ? "active" : undefined))
+                            section.line
+                                div.character(data-character=character.toLowerCase())= character
+                                if dialogue instanceof Array
+                                    <!-- multiple lines for #{character} -->
+                                    - dialogue = dialogue.join('<br/>')
+                                div.dialogue!= dialogue
+                                div.clear
+                            div.sourceCode
+                                pre
+                                    code.yaml= yaml.dump([item])
+                        - slideIndex++
