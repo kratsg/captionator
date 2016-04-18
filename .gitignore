@@ -36,6 +36,5 @@ node_modules
 data/
 
 # things that should be protected and private
-config/auth.js
+config/services.js
 services/passport.js
-config/keys.js
