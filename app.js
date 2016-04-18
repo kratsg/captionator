@@ -21,7 +21,7 @@ var expressSession = require('express-session');
 app.use(expressSession({secret: config.keys.expressSession}));
 app.use(passport.initialize());
 app.use(passport.session());
-require('./config/passport')(passport);
+require('./services/passport')(passport);
 
 var Firebase = require('firebase');
 var firebaseRef = new Firebase(config.auth.firebase.project);

@@ -37,5 +37,5 @@ data/
 
 # things that should be protected and private
 config/auth.js
-config/passport.js
+services/passport.js
 config/keys.js

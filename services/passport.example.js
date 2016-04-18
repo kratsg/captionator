@@ -1,5 +1,5 @@
 // load the auth variables
-var config = require('./index');
+var config = require('../config');
 
 // load all the things we need
 var FacebookStrategy = require('passport-facebook').Strategy;
