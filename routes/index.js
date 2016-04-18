@@ -44,6 +44,10 @@ router.get('/', function(req, res, next) {
   res.render('index', { title: 'Captionator' });
 });
 
+router.get('/me', isLoggedIn, function(req, res, next) {
+    res.render('me');
+});
+
 router.get('/plays', function(req, res, next) {
     req.fs.readdir('./data/', function(err, plays){
         if(err) throw err;
