@@ -18,7 +18,14 @@ var app = express();
 // Configuring Passport
 var passport = require('passport');
 var expressSession = require('express-session');
-app.use(expressSession({secret: config.keys.expressSession}));
+var sessionconfigs = config.services.session.express;
+if(app.get('env') === 'production') {
+    var FirebaseStore = require('connect-firebase')(expressSession);
+    sessionConfigs.store = new FirebaseStore(config.services.session.firebase);
+    sessionConfigs.resave = true;
+    sessionConfigs.saveUninitialized = true;
+}
+app.use(expressSession(sessionConfigs));
 app.use(passport.initialize());
 app.use(passport.session());
 require('./services/passport')(passport);
