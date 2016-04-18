@@ -1,14 +1,4 @@
 extends layout
 
-block header
-    link(rel='stylesheet', href='/css/style.css')
-
 block content
-  h1= title
-  p Welcome to #{title}
   p Would you like to get started by viewing a #[a(href='/plays') list of available plays]?
-
-  if locals.user
-    p Click here to <a href="/logout">log out</a>.
-  else
-    p Click here to <a href="/auth/facebook">log in</a>.

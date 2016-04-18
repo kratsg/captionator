@@ -44,12 +44,16 @@ router.get('/', function(req, res, next) {
   res.render('index', { title: 'Captionator' });
 });
 
+router.get('/me', isLoggedIn, function(req, res, next) {
+    res.render('me');
+});
+
 router.get('/plays', function(req, res, next) {
     req.fs.readdir('./data/', function(err, plays){
         if(err) throw err;
         plays = plays.filter(function(play){ return play.substr((~-play.lastIndexOf(".") >>> 0)+2) == "yml"; })
                      .map(function(play){ return play.replace('.yml', '') });
-        res.render('plays', {plays: plays});
+        res.render('plays', {title: 'Plays', plays: plays});
     });
 });
 

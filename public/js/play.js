@@ -1,7 +1,7 @@
 var play = (function(){
     var playTitle = window.playName.replace(/_/g, ' ');
-    var pushState = function(index){
-        history.pushState({}, playTitle+": slide "+index, index);
+    var replaceState = function(index){
+        history.replaceState({}, playTitle+": slide "+index, index);
     };
 
     var moveForward = function(){
@@ -10,7 +10,7 @@ var play = (function(){
         if(nextSlide && nextSlide.length){
             currSlide.removeClass('active');
             nextSlide.addClass('active');
-            pushState(nextSlide.index('.slide'));
+            replaceState(nextSlide.index('.slide'));
         }
         blankScreen('hide');
         return false;
@@ -22,7 +22,7 @@ var play = (function(){
         if(prevSlide && prevSlide.length){
             currSlide.removeClass('active');
             prevSlide.addClass('active');
-            pushState(prevSlide.index('.slide'));
+            replaceState(prevSlide.index('.slide'));
         }
         blankScreen('hide');
         return false;
