@@ -49,9 +49,11 @@ html
                             a(href='/help') Help
                     else
                         li
-                            a(href="/auth/facebook")#[i.fa.fa-facebook] Login with Facebook
+                            a(href="/auth/facebook") #[i.fa.fa-facebook] Login with Facebook
                 form.navbar-form.navbar-right
                     input.form-control(type='text', placeholder='Plays...')
+
+    - console.log(locals)
 
     // below navbar
     .container-fluid
@@ -60,32 +62,14 @@ html
                 // left nav bar
                 .col-sm-3.col-md-2.sidebar
                     ul.nav.nav-sidebar
-                        li.active
-                            a(href='#')
-                                | Overview
+                        li(class=(locals.url==='/' ? 'active' : ''))
+                            a(href='/')
+                                | Home
                                 span.sr-only (current)
-                        li
-                            a(href='#') Reports
-                        li
-                            a(href='#') Analytics
-                    ul.nav.nav-sidebar
-                        li
-                            a(href='') Nav item
-                        li
-                            a(href='') Nav item again
-                        li
-                            a(href='') One more nav
-                        li
-                            a(href='') Another nav item
-                        li
-                            a(href='') More navigation
-                    ul.nav.nav-sidebar
-                        li
-                            a(href='') Nav item again
-                        li
-                             a(href='') One more nav
-                        li
-                            a(href='') Another nav item
+                        li(class=(locals.url==='/plays' ? 'active' : ''))
+                            a(href='plays')
+                                | Plays
+                                span.sr-only (current)
 
             // right side (main content)
             .col-sm-9.col-sm-offset-3.col-md-10.col-md-offset-2.main
