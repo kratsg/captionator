@@ -10,6 +10,8 @@ body {
     height: 100%;
     opacity: 1.0;
     transition: opacity 0.5s ease-in-out;
+    font-size: 200%;
+    padding-top: 20px;
 }
 
 /* hide the body when we want to */
