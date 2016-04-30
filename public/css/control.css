@@ -1,3 +1,22 @@
-.slide.active+.slide, .slide.active+.slide+.slide {
+body {
+    overflow: hidden;
+}
+
+.slide.active {
+    border: 1px solid white;
+    margin-bottom: 25px;
+}
+
+.slide.active+.slide {
     display: block;
+    background-color: #555;
+    font-size: 75%;
+    opacity: 0.75;
+}
+
+.slide.active+.slide+.slide {
+    display: block;
+    background-color: #999;
+    font-size: 50%;
+    opacity: 0.5;
 }
