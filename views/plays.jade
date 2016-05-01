@@ -7,6 +7,6 @@ block content
     ul
         each play in plays
             if locals.user
-              li #[a(href="/play/#{play}/0")= play] [#[a(href="/source/#{play}") source]] [#[a(href="/edit/#{play}") edit]]
+              li #[a(href="/watch/#{play}/0")= play] [#[a(href="/play/#{play}/0") control]] [#[a(href="/source/#{play}") source]] [#[a(href="/edit/#{play}") edit]]
             else
               li #[a(href="/watch/#{play}/0")= play]
