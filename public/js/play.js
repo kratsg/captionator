@@ -1,31 +1,31 @@
 var play = (function(){
+    var currSlideIndex = $('.slide.active').index('.slide');
     var playTitle = window.playName.replace(/_/g, ' ');
     var replaceState = function(index){
+        currSlideIndex = index;
         history.replaceState({}, playTitle+": slide "+index, index);
     };
 
-    var moveForward = function(){
+    var moveTo = function(index){
+        index = index || 0;
         var currSlide = $('.slide.active');
-        var nextSlide = currSlide.next('.slide');
-        if(nextSlide && nextSlide.length){
+        var nextSlide = $('.slide:eq('+index+')');
+        // negative indices are technically allowed, let's not do that
+        if(index >= 0 && nextSlide && nextSlide.length){
             currSlide.removeClass('active');
             nextSlide.addClass('active');
-            replaceState(nextSlide.index('.slide'));
+            replaceState(index);
         }
         blankScreen('hide');
         return false;
     };
 
+    var moveForward = function(){
+        return moveTo(currSlideIndex+1);
+    };
+
     var moveBackward = function(){
-        var currSlide = $('.slide.active');
-        var prevSlide = currSlide.prev('.slide');
-        if(prevSlide && prevSlide.length){
-            currSlide.removeClass('active');
-            prevSlide.addClass('active');
-            replaceState(prevSlide.index('.slide'));
-        }
-        blankScreen('hide');
-        return false;
+        return moveTo(currSlideIndex-1);
     };
 
     var blankScreen = function(method){
