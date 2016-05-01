@@ -1,10 +1,29 @@
 body {
     overflow: hidden;
+    counter-reset: slide;
 }
 
+/* do not need body to be hidden on control */
+body.hide {
+    opacity: 1.0;
+}
+
+/* make sure people know it's hidden */
+body.hide:after {
+    content: "hidden";
+    color: red;
+}
+
+/* this is for absolutely positioning slide numbers */
+.slide {
+     position: relative;
+}
+
+/* Generally style slides for separating which is 1st, 2nd, 3rd */
 .slide.active {
     border: 1px solid white;
     margin-bottom: 25px;
+    transition: background-color 0.5s ease-in-out;
 }
 
 .slide.active+.slide {
@@ -19,4 +38,12 @@ body {
     background-color: #999;
     font-size: 50%;
     opacity: 0.5;
+}
+
+/* Label the slides */
+.slide:before {
+    counter-increment: slide;
+    content: counter(slide);
+    position: absolute;
+    font-size: 50%;
 }
