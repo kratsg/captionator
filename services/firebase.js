@@ -1,6 +1,6 @@
 var firepad = require('firepad');
 
-// the idea here is to use Firebase to sync our files only after 30 seconds of inactivity
+// the idea here is to use Firebase to sync our files only after 10 seconds of inactivity
 var playTimers = {};
 
 module.exports = function(firebaseRef, callback){
@@ -10,7 +10,7 @@ module.exports = function(firebaseRef, callback){
         if(playName in playTimers){
             clearTimeout(playTimers[playName]);
         }
-        playTimers[playName] = setTimeout(function(){updatePlay(snapshot)}, 30*1000);
+        playTimers[playName] = setTimeout(function(){updatePlay(snapshot)}, 10*1000);
 
     }, function(errorObject) {
         console.log("The read failed: " + errorObject.code);
