@@ -3,13 +3,13 @@
 */
 (function(){
     Mousetrap.bind(['right', 'down', 'space'], function(){
-        socket.emit('move forward', {});
-        play.moveForward();
+        var slideIndex = play.moveForward();
+        if(slideIndex !== null) socket.emit('move forward', {});
     });
 
     Mousetrap.bind(['left', 'up', 'backspace'], function(){
-        socket.emit('move backward', {});
-        play.moveBackward();
+        var slideIndex = play.moveBackward();
+        if(slideIndex !== null) socket.emit('move backward', {});
     });
 
     Mousetrap.bind('b', function(){
