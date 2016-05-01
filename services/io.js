@@ -16,12 +16,8 @@ io.on('connection', function (socket) {
     });
 
     if(socket.decoded_token.user !== undefined){
-        socket.on('move forward', function(){
-            socket.broadcast.to(socket.play).emit('move forward', {});
-        });
-
-        socket.on('move backward', function(){
-            socket.broadcast.to(socket.play).emit('move backward', {});
+        socket.on('move to', function(data){
+            socket.broadcast.to(socket.play).emit('move to', data);
         });
 
         socket.on('toggle blank screen', function(){

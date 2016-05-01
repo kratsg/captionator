@@ -2,14 +2,25 @@
     This requires play.js
 */
 (function(){
+
+    var movePlay = function(slideIndex){
+        if(slideIndex !== null) socket.emit('move to', slideIndex);
+    };
+
     Mousetrap.bind(['right', 'down', 'space'], function(){
-        socket.emit('move forward', {});
-        play.moveForward();
+        movePlay(play.moveForward());
     });
 
     Mousetrap.bind(['left', 'up', 'backspace'], function(){
-        socket.emit('move backward', {});
-        play.moveBackward();
+        movePlay(play.moveBackward());
+    });
+
+    Mousetrap.bind(['shift+left', 'shift+up', 'shift+backspace'], function(){
+        movePlay(play.moveBackward(2));
+    });
+
+    Mousetrap.bind(['shift+right', 'shift+down', 'shift+space'], function(){
+        movePlay(play.moveForward(2));
     });
 
     Mousetrap.bind('b', function(){
@@ -27,8 +38,10 @@
         play.toggleCode('toggle');
     });
 
-    var helpScreen = "[right], [down], [spacebar] to move forward\n"+
-                     "[left], [up], [backspace] to move backward\n"+
+    var helpScreen = "[right], [down], [spacebar] to move forward 1 slide\n"+
+                     "[left], [up], [backspace] to move backward 1 slide\n"+
+                     "[shift]+([right], [down], [spacebar]) to move forward 2 slides\n"+
+                     "[shift]+([left], [up], [backspace]) to move backward 2 slides\n"+
                      "[b] to toggle the blank screen (changing slides hides me)\n"+
                      "[g r i d] to toggle the grid display (at 10px and 50px)\n"+
                      "[s] to toggle the source code for the given slide\n"+
