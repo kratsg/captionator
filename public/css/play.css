@@ -117,16 +117,12 @@ body.showCode .sourceCode {
 }
 
 /* CSS specific to types of slides / lines that are universal */
-.character[data-character="action"], .character[data-character="sound"] {
+.character[data-character="action"], .character[data-character="sound"], .character[data-character="music"] {
     visibility: hidden;
 }
 
 .character[data-character="action"]+.dialogue, .character[data-character="sound"]+.dialogue {
     font-style: oblique;
-}
-
-.character[data-character="sound"]+.dialogue {
-    text-align: center;
 }
 
 .character[data-character="sound"]+.dialogue::before {
