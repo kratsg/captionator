@@ -58,6 +58,7 @@ var play = (function(){
     socket.emit('connect viewer', {});
     socket.on('move forward', function(){moveForward()});
     socket.on('move backward', function(){moveBackward()});
+    socket.on('move to', moveTo);
     socket.on('toggle blank screen', function(){blankScreen('toggle');});
     socket.on('toggle grid', toggleGrid);
     socket.on('toggle source code', function(){toggleCode('toggle');});
