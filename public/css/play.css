@@ -4,13 +4,13 @@ html {
 
 body {
     font: 14px Tahoma, Verdana, Segoe, sans-serif;
+    font-size: 200%;
     color: yellow;
     background-color: black;
 
     height: 100%;
     opacity: 1.0;
     transition: opacity 0.5s ease-in-out;
-    font-size: 200%;
     padding-top: 20px;
 }
 
@@ -71,8 +71,9 @@ body.showCode .sourceCode {
 
 .slide {
     background-color: rgba(255,255,255,0.0); /* background color of all slides */
-    width: 800px; /* maximum width of all slides */
+    width: 850px; /* maximum width of all slides */
 
+    margin: 0;
     display: none;
 }
 
@@ -105,14 +106,55 @@ body.showCode .sourceCode {
     }
 
     .line .dialogue {
-        max-width: 600px;
-        width: 600px;
+        max-width: 650px;
+        width: 650px;
 
-        text-align: left;
+        text-align: center;
     }
 
 .slide .line + .line {
     margin-top: 15px;
 }
 
+/* CSS specific to types of slides / lines that are universal */
+.character[data-character="action"], .character[data-character="sound"] {
+    visibility: hidden;
+}
 
+.character[data-character="action"]+.dialogue, .character[data-character="sound"]+.dialogue {
+    font-style: oblique;
+}
+
+.character[data-character="sound"]+.dialogue {
+    text-align: center;
+}
+
+.character[data-character="sound"]+.dialogue::before {
+    content: '(';
+}
+
+
+.character[data-character="sound"]+.dialogue::after {
+    content: ')';
+}
+
+.character[data-character="music"]+.dialogue::before {
+    content: " ♪ ";
+    /*content: ' \1f50a'; /* speaker with 3 waves */
+    /*content: '  \266a  '; /* musical eighth note */
+}
+
+
+.character[data-character="music"]+.dialogue::after {
+    content: " ♪ ";
+    /*content: ' \1f50a'; /* speaker with 3 waves */
+    /*content: '  \266a  '; /* musical eighth note */
+}
+
+.character[data-character="title"] {
+    visibility: hidden;
+}
+
+.character[data-character="title"]+.dialogue {
+    font-size: 200%;
+}
