@@ -5,6 +5,7 @@ html
 
     link(rel='stylesheet', href='/css/normalize.css')
     script(src='/socket.io/socket.io.js')
+    script(src='/js/jquery-2.2.0.min.js')
 
     script.
         var socket = io.connect('', {
@@ -30,7 +31,6 @@ html
     script.
         window.playName = "#{playName}";
     script(src='/js/mousetrap.min.js')
-    script(src='/js/jquery-2.2.0.min.js')
     script(src='/js/highlight.pack.js')
     script.
         socket.on('connect', function(){
