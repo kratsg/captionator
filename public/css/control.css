@@ -14,6 +14,36 @@ body.hide:after {
     color: red;
 }
 
+#connectionStatus {
+    display: block;
+    position: absolute;
+    bottom: 0px;
+    left: 10px;
+    background-color: #ccc;
+    border-radius: 15px 15px 0 0;
+    padding: 10px;
+    font-size: 50%;
+    transition: all 1s ease-in-out;
+}
+
+    body.online #connectionStatus {
+        background-color: #0f0;
+        color: #000;
+    }
+
+    body.error #connectionStatus {
+        background-color: #f00;
+        color: #fff;
+    }
+
+    body.online #connectionStatus:before {
+        content: "Online";
+    }
+
+    body.error #connectionStatus:before {
+        content: "Error: " attr(data-err-msg);
+    }
+
 /* this is for absolutely positioning slide numbers */
 .slide {
      position: relative;
