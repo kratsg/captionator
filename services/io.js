@@ -36,6 +36,11 @@ io.on('connection', function (socket) {
             socket.broadcast.to(socket.play).emit('toggle source code', {});
             console.log('['+new Date()+']  ', socket.play, "toggle source code");
         });
+
+        socket.on('refresh', function(){
+            socket.broadcast.to(socket.play).emit('refresh', {});
+            console.log('['+new Date()+']  ', socket.play, "refresh");
+        });
     }
 
     socket.on('connect viewer', function(data){

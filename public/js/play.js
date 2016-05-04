@@ -62,6 +62,7 @@ var play = (function(){
     socket.on('toggle blank screen', function(){blankScreen('toggle');});
     socket.on('toggle grid', toggleGrid);
     socket.on('toggle source code', function(){toggleCode('toggle');});
+    socket.on('refresh', function(){location.reload(true);});
 
     return {
         moveForward: moveForward,
