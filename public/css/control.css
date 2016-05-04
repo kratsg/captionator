@@ -31,7 +31,7 @@ body.hide:after {
         color: #000;
     }
 
-    body.offline #connectionStatus {
+    body.error #connectionStatus {
         background-color: #f00;
         color: #fff;
     }
@@ -40,8 +40,8 @@ body.hide:after {
         content: "Online";
     }
 
-    body.offline #connectionStatus:before {
-        content: "Offline";
+    body.error #connectionStatus:before {
+        content: "Error: " attr(data-err-msg);
     }
 
 /* this is for absolutely positioning slide numbers */
