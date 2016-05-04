@@ -38,7 +38,6 @@ html
     script.
         window.playName = "#{playName}";
     script(src='/js/mousetrap.min.js')
-    script(src='/js/highlight.pack.js')
     script.
         socket.on('connect', function(){
             socket.emit('subscribe', playName);
@@ -63,9 +62,6 @@ html
                                     - dialogue = dialogue.join('<br/>')
                                 div.dialogue!= dialogue
                             div.clear
-                    div.sourceCode
-                        pre
-                            code.yaml= yaml.dump(item)
                 - slideIndex++
             else
                 // item is multiple slides
@@ -81,9 +77,6 @@ html
                                     - dialogue = dialogue.join('<br/>')
                                 div.dialogue!= dialogue
                                 div.clear
-                            div.sourceCode
-                                pre
-                                    code.yaml= yaml.dump([item])
                         - slideIndex++
         script(src='/js/play.js')
         if !client

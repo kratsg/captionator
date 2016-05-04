@@ -37,18 +37,12 @@
         socket.emit('refresh', {});
     });
 
-    Mousetrap.bind('s', function(){
-        socket.emit('toggle source code', {});
-        play.toggleCode('toggle');
-    });
-
     var helpScreen = "[right], [down], [spacebar] to move forward 1 slide\n"+
                      "[left], [up], [backspace] to move backward 1 slide\n"+
                      "[shift]+([right], [down], [spacebar]) to move forward 2 slides\n"+
                      "[shift]+([left], [up], [backspace]) to move backward 2 slides\n"+
                      "[b] to toggle the blank screen (changing slides hides me)\n"+
                      "[g r i d] to toggle the grid display (at 10px and 50px)\n"+
-                     "[s] to toggle the source code for the given slide\n"+
                      "[r] to reload the watcher pages\n"+
                      "[?] to show this dialog";
     Mousetrap.bind('?', function(){alert(helpScreen)});

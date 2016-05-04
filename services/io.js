@@ -38,11 +38,6 @@ io.on('connection', function (socket) {
             console.log('['+new Date()+']  ', socket.play, "toggle grid");
         });
 
-        socket.on('toggle source code', function(){
-            socket.broadcast.to(socket.play).emit('toggle source code', {});
-            console.log('['+new Date()+']  ', socket.play, "toggle source code");
-        });
-
         socket.on('refresh', function(){
             socket.broadcast.to(socket.play).emit('refresh', {});
             console.log('['+new Date()+']  ', socket.play, "refresh");

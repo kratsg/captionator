@@ -47,28 +47,18 @@ var play = (function(){
         $('body').toggleClass('grid');
     };
 
-    var toggleCode = function(method){
-        if(typeof method == "undefined") method = 'toggle';
-        if(method == 'toggle') $('body').toggleClass('showCode');
-        if(method == 'hide')   $('body').removeClass('showCode');
-        if(method == 'show')   $('body').addClass('showCode');
-    };
-    hljs.initHighlightingOnLoad();
-
     socket.emit('connect viewer', {});
     socket.on('move forward', function(){moveForward()});
     socket.on('move backward', function(){moveBackward()});
     socket.on('move to', moveTo);
     socket.on('toggle blank screen', function(){blankScreen('toggle');});
     socket.on('toggle grid', toggleGrid);
-    socket.on('toggle source code', function(){toggleCode('toggle');});
     socket.on('refresh', function(){location.reload(true);});
 
     return {
         moveForward: moveForward,
         moveBackward: moveBackward,
         blankScreen: blankScreen,
-        toggleGrid: toggleGrid,
-        toggleCode: toggleCode
+        toggleGrid: toggleGrid
     };
 })();
