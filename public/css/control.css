@@ -44,6 +44,21 @@ body.hide:after {
         content: "Error: " attr(data-err-msg);
     }
 
+#viewerStatus {
+    display: block;
+    position: absolute;
+    bottom: 0px;
+    right: 10px;
+    background-color: #ccc;
+    border-radius: 15px 15px 0 0;
+    padding: 10px;
+    font-size: 50%;
+}
+
+    #viewerStatus:before {
+        content: attr(data-unauthUsers) " viewers"
+    }
+
 /* this is for absolutely positioning slide numbers */
 .slide {
      position: relative;

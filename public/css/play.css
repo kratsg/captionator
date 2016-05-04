@@ -23,6 +23,10 @@ body.hide {
     display: none;
 }
 
+#viewerStatus {
+    display: none;
+}
+
 /* to show and hide the code blocks */
 .sourceCode {
     display: none;

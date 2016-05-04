@@ -7,13 +7,19 @@ var authorizer = socketioJwt.authorize({
     handshake: true
 });
 
+
+var authUsers = {},
+    unauthUsers = {};
+
 io.use(authorizer);
 
 io.on('connection', function (socket) {
     socket.on('subscribe', function(play){
         socket.play = play;
         socket.join(play);
-        console.log('['+new Date()+']  ', ((socket.decoded_token.user !== undefined)?"A":"Una")+"uthorized user joining "+play);
+        console.log('['+new Date()+']  ', ((socket.decoded_token.user !== undefined)?"A":"Una")+"uthorized user joining "+socket.play);
+        if(socket.decoded_token.user !== undefined){authUsers[socket.play] = (authUsers[socket.play] || 0) + 1;}
+        else {unauthUsers[socket.play] = (unauthUsers[socket.play] || 0) +1;}
     });
 
     if(socket.decoded_token.user !== undefined){
@@ -43,9 +49,16 @@ io.on('connection', function (socket) {
         });
     }
 
+    socket.on('disconnect', function(){
+        if(socket.decoded_token.user !== undefined){authUsers[socket.play]--;}
+        else {unauthUsers[socket.play]--;}
+        socket.broadcast.to(socket.play).emit('disconnect viewer', {authUsers: authUsers[socket.play], unauthUsers: unauthUsers[socket.play]});
+        console.log('['+new Date()+']  ', socket.play, "disconnect viewer", {authUsers: authUsers[socket.play], unauthUsers: unauthUsers[socket.play]});
+    });
+
     socket.on('connect viewer', function(data){
-        socket.broadcast.to(socket.play).emit('connect viewer', {});
-        console.log('['+new Date()+']  ', socket.play, "connect viewer");
+        socket.broadcast.to(socket.play).emit('connect viewer', {authUsers: authUsers[socket.play], unauthUsers: unauthUsers[socket.play]});
+        console.log('['+new Date()+']  ', socket.play, "connect viewer", {authUsers: authUsers[socket.play], unauthUsers: unauthUsers[socket.play]});
     });
 });
 

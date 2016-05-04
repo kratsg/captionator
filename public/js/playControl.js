@@ -53,7 +53,13 @@
                      "[?] to show this dialog";
     Mousetrap.bind('?', function(){alert(helpScreen)});
 
-    socket.on('connect viewer', function(){
-        console.log('a viewer has connected');
+    socket.on('connect viewer', function(data){
+        $('#viewerStatus').attr('data-unauthUsers', data['unauthUsers']);
+        console.log('someone has connected');
+    });
+
+    socket.on('disconnect viewer', function(data){
+        $('#viewerStatus').attr('data-unauthUsers', data['unauthUsers']);
+        console.log('someone has disconnected');
     });
 })();
