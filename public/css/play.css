@@ -19,6 +19,10 @@ body.hide {
     opacity: 0.0;
 }
 
+#connectionStatus {
+    display: none;
+}
+
 /* to show and hide the code blocks */
 .sourceCode {
     display: none;
