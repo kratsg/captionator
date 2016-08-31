@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "Captioning Made Simple",
   "engines": {
-    "node" "4.2.6"
+    "node": "4.2.6"
   },
   "private": true,
   "scripts": {
