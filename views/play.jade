@@ -56,6 +56,8 @@ html
                     each line in item
                         section.line
                             each dialogue, character in line
+                                if typeof(line) == 'string'
+                                  - throw Error('You gave me a line without a character: "'+line+'"')
                                 div.character(data-character=character.toLowerCase())= character
                                 if dialogue instanceof Array
                                     <!-- multiple lines for #{character} -->
