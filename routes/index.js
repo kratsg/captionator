@@ -9,9 +9,9 @@ var tokenGenerator = new FirebaseTokenGenerator(config.services.firebase.secret)
 // this is for checking what plays exist, for example
 var Firebase = require('firebase');
 var firebaseRef = new Firebase(config.services.firebase.project);
+var firepad = require('firepad');
 
 /* Authentication Sessions */
-
 // route middleware to make sure a user is logged in
 var isLoggedIn = function (req, res, next) {
     // if user is authenticated in the session, carry on
@@ -19,6 +19,21 @@ var isLoggedIn = function (req, res, next) {
 
     // if they aren't redirect them to the home page
     res.redirect('/');
+};
+
+var isExistingPlay = function(req, res, next) {
+    // first check to see if we've set it up in firebase yet, if we haven't, start it up
+    firebaseRef.authWithCustomToken(tokenGenerator.createToken({uid:"admin"}));
+
+    firebaseRef.child('play_data/'+req.params.playName).once("value", function(snapshot){
+        // need to make a headless and set the text first
+        if(!snapshot.exists()){
+          return next(new Error("That play does not exist!"));
+        } else {
+          req.snapshot = snapshot;
+          return next();
+        }
+    });
 };
 
 router.get('/auth/facebook',
@@ -60,72 +75,72 @@ router.get('/plays', function(req, res, next) {
 /*
     To make our life easier, we will render the same page (play.jade) with extra JS depending on whether or not the person rendering it is a cuer (leader) or client (watcher).
 */
-router.get('/play/:playName/:currIndex', isLoggedIn, function(req, res, next) {
-    res.render('play', {
-                        corpus: req.yaml.safeLoad(req.fs.readFileSync('./data/'+req.params.playName+'.yml','utf8')),
-                        playName: req.params.playName,
-                        title: req.params.playName.replace(/_/g, ' '),
-                        currIndex: req.params.currIndex,
-                        yaml: req.yaml,
-                        client: false // control over changing slides or not
-                       });
+router.get('/play/:playName/:currIndex', isLoggedIn, isExistingPlay, function(req, res, next) {
+    var headless = new firepad.Headless(req.snapshot.child('firepad').ref());
+    headless.getText(function(text){
+        headless.dispose(); // don't need it anymore
+        res.render('play', {
+            corpus: req.yaml.safeLoad(text),
+            playName: req.params.playName,
+            title: req.params.playName.replace(/_/g, ' '),
+            currIndex: req.params.currIndex,
+            yaml: req.yaml,
+            client: false // control over changing slides or not
+        });
+    });
 });
 
-router.get('/watch/:playName/:currIndex', function(req, res, next) {
-    res.render('play', {
-                        corpus: req.yaml.safeLoad(req.fs.readFileSync('./data/'+req.params.playName+'.yml','utf8')),
-                        playName: req.params.playName,
-                        title: req.params.playName.replace(/_/g, ' '),
-                        currIndex: req.params.currIndex,
-                        yaml: req.yaml,
-                        client: true // control over changing slides or not
-                       });
+router.get('/watch/:playName/:currIndex', isExistingPlay, function(req, res, next) {
+    var headless = new firepad.Headless(req.snapshot.child('firepad').ref());
+    headless.getText(function(text){
+        headless.dispose(); // don't need it anymore
+        res.render('play', {
+            corpus: req.yaml.safeLoad(text),
+            playName: req.params.playName,
+            title: req.params.playName.replace(/_/g, ' '),
+            currIndex: req.params.currIndex,
+            yaml: req.yaml,
+            client: true // control over changing slides or not
+        });
+    });
 });
 
-router.get('/source/:playName', isLoggedIn, function(req, res, next) {
-    res.render('source', {
-                          corpus: req.fs.readFileSync('./data/'+req.params.playName+'.yml','utf8'),
-                          playName: req.params.playName,
-                          title: req.params.playName.replace(/_/g, ' '),
-                          currIndex: req.params.currIndex,
-                          yaml: req.yaml
-                         });
+router.get('/source/:playName', isLoggedIn, isExistingPlay, function(req, res, next) {
+    var headless = new firepad.Headless(req.snapshot.child('firepad').ref());
+    headless.getText(function(text){
+        headless.dispose(); // don't need it anymore
+
+        res.render('source', {
+            corpus: text,
+            playName: req.params.playName,
+            title: req.params.playName.replace(/_/g, ' '),
+            currIndex: req.params.currIndex,
+            yaml: req.yaml
+        });
+    });
 });
 
-router.get('/download/:playName', isLoggedIn, function(req, res, next) {
-    res.download('./data/'+req.params.playName+'.yml');
+router.get('/download/:playName', isLoggedIn, isExistingPlay, function(req, res, next) {
+    var headless = new firepad.Headless(req.snapshot.child('firepad').ref());
+    headless.getText(function(text){
+        headless.dispose(); // don't need it anymore
+
+        var Readable = require('stream').Readable
+
+        var s = new Readable();
+        s.push(text);    // the string you want
+        s.push(null);      // indicates end-of-file basically - the end of the stream
+
+        res.download(s);
+    });
 });
 
-router.get('/edit/:playName', isLoggedIn, function(req, res, next) {
-    // we assume the file exists
-    var corpus = req.fs.readFileSync('./data/'+req.params.playName+'.yml','utf8');
-
-    var renderCallback = function(){
-        res.render('edit', {
-                              playName: req.params.playName,
-                              title: req.params.playName.replace(/_/g, ' '),
-                              currIndex: req.params.currIndex,
-                              yaml: req.yaml,
-                              firebaseToken: tokenGenerator.createToken({uid:"admin"})
-                             });
-    };
-
-    // first check to see if we've set it up in firebase yet, if we haven't, start it up
-    firebaseRef.authWithCustomToken(tokenGenerator.createToken({uid:"admin"}));
-    firebaseRef.child(req.params.playName).once("value", function(snapshot){
-        // need to make a headless and set the text first
-        if(!snapshot.exists()){
-            var firepad = require('firepad');
-            var playName = snapshot.key();
-            var headless = new firepad.Headless(snapshot.ref());
-            headless.setText(corpus, function(err, committed){
-                headless.dispose(); // don't need it anymore
-                renderCallback();
-            });
-        } else {
-            renderCallback();
-        }
-    })
+router.get('/edit/:playName', isLoggedIn, isExistingPlay, function(req, res, next) {
+    res.render('edit', {
+        playName: req.params.playName,
+        title: req.params.playName.replace(/_/g, ' '),
+        firebaseToken: tokenGenerator.createToken({uid:"admin"})
+    });
 });
 
 module.exports = router;
