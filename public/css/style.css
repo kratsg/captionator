@@ -87,3 +87,9 @@ body {
 .main .page-header {
   margin-top: 0;
 }
+
+/* For a bug in Ace Editor highlight search box, see https://github.com/ajaxorg/ace/issues/3071 */
+.ace_search_form {
+  color: black;
+}
+
