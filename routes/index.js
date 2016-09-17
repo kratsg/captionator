@@ -64,11 +64,12 @@ router.get('/me', isLoggedIn, function(req, res, next) {
 });
 
 router.get('/plays', function(req, res, next) {
-    req.fs.readdir('./data/', function(err, plays){
-        if(err) throw err;
-        plays = plays.filter(function(play){ return play.substr((~-play.lastIndexOf(".") >>> 0)+2) == "yml"; })
-                     .map(function(play){ return play.replace('.yml', '') });
-        res.render('plays', {title: 'Plays', plays: plays});
+    plays = [];
+    firebaseRef.child('plays').once("value", function(snapshot){
+      snapshot.forEach(function(play){
+        plays.push(play.key());
+      });
+      res.render('plays', {title: 'Plays', plays: plays});
     });
 });
 
