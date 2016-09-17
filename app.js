@@ -32,10 +32,10 @@ require('./services/passport')(passport);
 
 var Firebase = require('firebase');
 var firebaseRef = new Firebase(config.services.firebase.project);
-require('./services/firebase')(firebaseRef, function(playName, text){
-    console.log('Writing a play: ', playName);
-    fs.writeFileSync('./data/'+playName+'.yml',text);
-});
+//require('./services/firebase')(firebaseRef, function(playName, text){
+//    console.log('Writing a play: ', playName);
+//    fs.writeFileSync('./data/'+playName+'.yml',text);
+//});
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
