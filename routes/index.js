@@ -80,8 +80,14 @@ router.get('/play/:playName/:currIndex', isLoggedIn, isExistingPlay, function(re
     var headless = new firepad.Headless(req.snapshot.child('firepad').ref());
     headless.getText(function(text){
         headless.dispose(); // don't need it anymore
+        var corpus;
+        try {
+          corpus = req.yaml.safeLoad(text);
+        } catch(e) {
+          return next(e);
+        }
         res.render('play', {
-            corpus: req.yaml.safeLoad(text),
+            corpus: corpus,
             playName: req.params.playName,
             title: req.params.playName.replace(/_/g, ' '),
             currIndex: req.params.currIndex,
@@ -95,8 +101,14 @@ router.get('/watch/:playName/:currIndex', isExistingPlay, function(req, res, nex
     var headless = new firepad.Headless(req.snapshot.child('firepad').ref());
     headless.getText(function(text){
         headless.dispose(); // don't need it anymore
+        var corpus;
+        try {
+          corpus = req.yaml.safeLoad(text);
+        } catch(e) {
+          return next(e);
+        }
         res.render('play', {
-            corpus: req.yaml.safeLoad(text),
+            corpus: corpus,
             playName: req.params.playName,
             title: req.params.playName.replace(/_/g, ' '),
             currIndex: req.params.currIndex,
