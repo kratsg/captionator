@@ -61,7 +61,17 @@ body.hide:after {
 
 /* this is for absolutely positioning slide numbers */
 .slide {
-     position: relative;
+   position: relative;
+   width: 90%;
+}
+
+.slide .character {
+  width: 100%;
+}
+
+.slide .dialogue {
+    clear: both;
+    width: 100%;
 }
 
 /* Generally style slides for separating which is 1st, 2nd, 3rd */
