@@ -5,11 +5,11 @@ body {
 
 /* do not need body to be hidden on control */
 body.hide {
-    opacity: 1.0;
+    opacity: 0.5;
 }
 
 /* make sure people know it's hidden */
-body.hide:after {
+body.hide::after {
     content: "hidden";
     color: red;
 }
