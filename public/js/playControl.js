@@ -43,8 +43,8 @@
     };
     var hammertime = new Hammer($('body')[0], hammerOptions);
 
-    hammertime.on("dragright swiperight", function(ev){ movePlay(play.moveForward()); ev.preventDefault(); });
-    hammertime.on("dragleft swipeleft", function(ev){ movePlay(play.moveBackward()); ev.preventDefault(); });
+    hammertime.on("dragleft swipeleft", function(ev){ movePlay(play.moveForward()); ev.preventDefault(); });
+    hammertime.on("dragright swiperight", function(ev){ movePlay(play.moveBackward()); ev.preventDefault(); });
     hammertime.on("press", function(ev){ socket.emit('toggle blank screen', {}); play.blankScreen('toggle'); });
 
     var helpScreen = "[right], [down], [spacebar] to move forward 1 slide\n"+
