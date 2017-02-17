@@ -10,7 +10,7 @@ module.exports = {
         databaseURL: "https://yourapp.firebaseio.com",
         storageBucket: "firebase-yourapp.appspot.com",
         messagingSenderId: "<your messaging sender id>",
-        credential: "path/to/serviceAccountKey.json"
+        credentialPath: "path/to/serviceAccountKey.json"
     },
     session: {
         express: {

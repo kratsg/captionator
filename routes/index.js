@@ -5,8 +5,9 @@ var router = express.Router();
 var config = require('../config')
 
 var firebaseAdmin = require("firebase-admin");
+var credential = require(config.services.firebase.credentialPath);
 firebaseAdmin.initializeApp({
-  credential: firebaseAdmin.credential.cert(config.services.firebase.credential),
+  credential: firebaseAdmin.credential.cert(credential),
   databaseURL: config.services.firebase.databaseURL
 });
 
