@@ -11,10 +11,6 @@ firebaseAdmin.initializeApp({
   databaseURL: config.services.firebase.databaseURL
 }, "admin-read-access");
 
-// this is for checking what plays exist, for example
-var Firebase = require('firebase');
-Firebase.initializeApp(config.services.firebase);
-var firebaseRef = Firebase.database().ref;
 var firepad = require('firepad');
 
 /* Authentication Sessions */
@@ -70,7 +66,7 @@ router.get('/me', isLoggedIn, function(req, res, next) {
 
 router.get('/plays', function(req, res, next) {
     plays = [];
-    firebaseRef.child('plays').once("value", function(snapshot){
+    firebaseAdmin.database().ref('plays').once("value", function(snapshot){
       snapshot.forEach(function(play){
         plays.push(play.key);
       });
