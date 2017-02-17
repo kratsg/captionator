@@ -6,8 +6,8 @@ var config = require('../config')
 
 var firebaseAdmin = require("firebase-admin");
 firebaseAdmin.initializeApp({
-  credential: firebaseAdmin.credential.cert(config.firebase.credential),
-  databaseURL: config.firebase.databaseURL
+  credential: firebaseAdmin.credential.cert(config.services.firebase.credential),
+  databaseURL: config.services.firebase.databaseURL
 });
 
 // this is for checking what plays exist, for example
