@@ -35,7 +35,8 @@ block content
 
     script.
         var init = function() {
-            var firepadRef = new Firebase('https://captionator.firebaseio.com/play_data/#{playName}/firepad');
+            firebase.initializeApp(!{JSON.stringify(firebaseConfig)});
+            var firepadRef = firebase.database().ref('play_data/#{playName}/firepad');
             firepadRef.signInWithCustomToken("#{firebaseToken}").catch(function(err){
                   console.log("(", error.code, ") Login Failed: ", error.message);
             });
