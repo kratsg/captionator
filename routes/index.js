@@ -145,7 +145,7 @@ router.get('/download/:playName', isLoggedIn, isExistingPlay, function(req, res,
         s.push(text);    // the string you want
         s.push(null);      // indicates end-of-file basically - the end of the stream
 
-        res.download(s);
+        res.download(s, req.playName+'.yml');
     });
 });
 
