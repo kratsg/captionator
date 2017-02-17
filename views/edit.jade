@@ -36,10 +36,10 @@ block content
     script.
         var init = function() {
             firebase.initializeApp(!{JSON.stringify(firebaseConfig)});
-            var firepadRef = firebase.database().ref('play_data/#{playName}/firepad');
-            firepadRef.signInWithCustomToken("#{firebaseToken}").catch(function(err){
+            firebase.auth().signInWithCustomToken("#{firebaseToken}").catch(function(err){
                   console.log("(", error.code, ") Login Failed: ", error.message);
             });
+            var firepadRef = firebase.database().ref('play_data/#{playName}/firepad');
             console.log('Firebase data: ', firepadRef.toString());
             // Create ACE
             var editor = ace.edit("firepad-container");
