@@ -38,7 +38,7 @@ var FirepadUserList = (function() {
     return elt('div', [
       this.makeHeading_(),
       elt('div', [
-        this.makeUserEntryForSelf_(),
+        //this.makeUserEntryForSelf_(),
         this.makeUserEntriesForOthers_()
       ], {'class': 'firepad-userlist-users' })
     ], {'class': 'firepad-userlist' });
@@ -127,7 +127,7 @@ var FirepadUserList = (function() {
       if (userId === self.userId_) {
         // HACK: We go ahead and insert ourself in the DOM, so we can easily order other users against it.
         // But don't show it.
-        userDiv.style.display = 'none';
+        // userDiv.style.display = 'none';
       }
 
       var nextElement =  prevChildName ? userId2Element[prevChildName].nextSibling : userList.firstChild;
