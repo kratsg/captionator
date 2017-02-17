@@ -8,7 +8,8 @@ var tokenGenerator = new FirebaseTokenGenerator(config.services.firebase.secret)
 
 // this is for checking what plays exist, for example
 var Firebase = require('firebase');
-var firebaseRef = new Firebase(config.services.firebase.project);
+Firebase.initializeApp(config.services.firebase);
+var firebaseRef = Firebase.database().ref();
 var firepad = require('firepad');
 
 /* Authentication Sessions */

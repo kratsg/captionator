@@ -5,8 +5,11 @@ module.exports = {
         callbackURL   : '/auth/facebook/callback'
     },
     firebase: {
-        project: 'https://<YOUR-FIREBASE-PROJECT>.firebaseio.com/',
-        secret: 'your-firebase-secret-here'
+        apiKey: "<your api key>",
+        authDomain: "yourapp.firebaseapp.com",
+        databaseURL: "https://yourapp.firebaseio.com",
+        storageBucket: "firebase-yourapp.appspot.com",
+        messagingSenderId: "<your messaging sender id>"
     },
     session: {
         express: {
