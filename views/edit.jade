@@ -36,12 +36,8 @@ block content
     script.
         var init = function() {
             var firepadRef = new Firebase('https://captionator.firebaseio.com/play_data/#{playName}/firepad');
-            firepadRef.authWithCustomToken("#{firebaseToken}", function(err, authData){
-                if(err){
-                    console.log("Login Failed!", err);
-                } else {
-                    console.log("Login Succeeded!", authData);
-                }
+            firepadRef.signInWithCustomToken("#{firebaseToken}").catch(function(err){
+                  console.log("(", error.code, ") Login Failed: ", error.message);
             });
             console.log('Firebase data: ', firepadRef.toString());
             // Create ACE

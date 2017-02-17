@@ -3,8 +3,12 @@ var passport = require('passport');
 var router = express.Router();
 
 var config = require('../config')
-var FirebaseTokenGenerator = require('firebase-token-generator');
-var tokenGenerator = new FirebaseTokenGenerator(config.services.firebase.secret);
+
+var firebaseAdmin = require("firebase-admin");
+firebaseAdmin.initializeApp({
+  credential: firebaseAdmin.credential.cert(config.firebase.credential),
+  databaseURL: config.firebase.databaseURL
+});
 
 // this is for checking what plays exist, for example
 var Firebase = require('firebase');
@@ -24,9 +28,8 @@ var isLoggedIn = function (req, res, next) {
 
 var isExistingPlay = function(req, res, next) {
     // first check to see if we've set it up in firebase yet, if we haven't, start it up
-    firebaseRef.authWithCustomToken(tokenGenerator.createToken({uid:"admin"}));
-
-    firebaseRef.child('play_data/'+req.params.playName).once("value", function(snapshot){
+    var db = firebaseAdmin.database();
+    db.ref('play_data/'+req.params.playName).once("value", function(snapshot){
         // need to make a headless and set the text first
         if(!snapshot.exists()){
           return next(new Error("That play does not exist!"));
@@ -150,11 +153,17 @@ router.get('/download/:playName', isLoggedIn, isExistingPlay, function(req, res,
 });
 
 router.get('/edit/:playName', isLoggedIn, isExistingPlay, function(req, res, next) {
-    res.render('edit', {
-        playName: req.params.playName,
-        title: req.params.playName.replace(/_/g, ' '),
-        firebaseToken: tokenGenerator.createToken({uid:"admin"})
-    });
+    firebaseAdmin.auth().createCustomToken("admin")
+         .then(function(customToken){
+            res.render('edit', {
+                playName: req.params.playName,
+                title: req.params.playName.replace(/_/g, ' '),
+                firebaseToken: customToken
+            });
+          })
+          .catch(function(error){
+            return next("Error creating custom token: ", error);
+          });
 });
 
 module.exports = router;
