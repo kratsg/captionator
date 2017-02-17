@@ -12,7 +12,7 @@ var FirepadUserList = (function() {
     var self = this;
     this.hasName_ = !!displayName;
     this.displayName_ = displayName || 'Guest ' + Math.floor(Math.random() * 1000);
-    this.firebaseOn_(ref.root().child('.info/connected'), 'value', function(s) {
+    this.firebaseOn_(ref.root.child('.info/connected'), 'value', function(s) {
       if (s.val() === true && self.displayName_) {
         var nameRef = ref.child(self.userId_).child('name');
         nameRef.onDisconnect().remove();
@@ -38,7 +38,7 @@ var FirepadUserList = (function() {
     return elt('div', [
       this.makeHeading_(),
       elt('div', [
-        //this.makeUserEntryForSelf_(),
+        this.makeUserEntryForSelf_(),
         this.makeUserEntriesForOthers_()
       ], {'class': 'firepad-userlist-users' })
     ], {'class': 'firepad-userlist' });
@@ -99,7 +99,7 @@ var FirepadUserList = (function() {
     var userId2Element = { };
 
     function updateChild(userSnapshot, prevChildName) {
-      var userId = userSnapshot.key();
+      var userId = userSnapshot.key;
       var div = userId2Element[userId];
       if (div) {
         userList.removeChild(div);
@@ -127,7 +127,7 @@ var FirepadUserList = (function() {
       if (userId === self.userId_) {
         // HACK: We go ahead and insert ourself in the DOM, so we can easily order other users against it.
         // But don't show it.
-        //userDiv.style.display = 'none';
+        userDiv.style.display = 'none';
       }
 
       var nextElement =  prevChildName ? userId2Element[prevChildName].nextSibling : userList.firstChild;
@@ -138,7 +138,7 @@ var FirepadUserList = (function() {
     this.firebaseOn_(this.ref_, 'child_changed', updateChild);
     this.firebaseOn_(this.ref_, 'child_moved', updateChild);
     this.firebaseOn_(this.ref_, 'child_removed', function(removedSnapshot) {
-      var userId = removedSnapshot.key();
+      var userId = removedSnapshot.key;
       var div = userId2Element[userId];
       if (div) {
         userList.removeChild(div);
