@@ -17,8 +17,8 @@ module.exports = {
             secret: (typeof process.env.EXPRESSSESSION_SECRET === 'undefined') ? 'secret' : process.env.EXPRESSSESSION_SECRET
         },
         firebase: {
-            host: '<YOUR-FIREBASE-SESSIONS-PROJECT>.firebaseio.com'
-            token: 'your-firebase-secret-here'
+            databaseURL: '<YOUR-FIREBASE-SESSIONS-PROJECT>.firebaseio.com',
+            credentialPath: 'path/to/serviceAccountKey.json'
         }
     },
     jwt: {

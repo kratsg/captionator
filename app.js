@@ -20,8 +20,13 @@ var passport = require('passport');
 var expressSession = require('express-session');
 var sessionConfigs = config.services.session.express;
 if(app.get('env') === 'production') {
-    var FirebaseStore = require('connect-firebase')(expressSession);
-    sessionConfigs.store = new FirebaseStore(config.services.session.firebase);
+    var FirebaseStore = require('connect-session-firebase')(expressSession);
+    var firebaseAdmin = require('firebase-admin');
+    var ref = firebaseAdmin.initializeApp({
+      credential: firebaseAdmin.credential.cert(config.services.session.firebase.credentialPath),
+      databaseURL: config.services.session.firebase.databaseURL
+    });
+    sessionConfigs.store = new FirebaseStore({database: ref.database()});
     sessionConfigs.resave = true;
     sessionConfigs.saveUninitialized = true;
 }
