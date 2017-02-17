@@ -9,7 +9,7 @@ var credential = require(config.services.firebase.credentialPath);
 firebaseAdmin.initializeApp({
   credential: firebaseAdmin.credential.cert(credential),
   databaseURL: config.services.firebase.databaseURL
-}, "admin-read-access");
+});
 
 var firepad = require('firepad');
 
