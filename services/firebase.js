@@ -6,7 +6,7 @@ var playTimers = {};
 module.exports = function(firebaseRef, callback){
 
     firebaseRef.on("child_changed", function(snapshot){
-        var playName = snapshot.key();
+        var playName = snapshot.key;
         if(playName in playTimers){
             clearTimeout(playTimers[playName]);
         }
@@ -17,7 +17,7 @@ module.exports = function(firebaseRef, callback){
     });
 
     var updatePlay = function(snapshot){
-        var playName = snapshot.key();
+        var playName = snapshot.key;
         console.log('Updating a play: ', playName);
         var headless = new firepad.Headless(snapshot.ref());
         headless.getText(function(text){

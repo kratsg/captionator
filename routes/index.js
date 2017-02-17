@@ -14,7 +14,7 @@ firebaseAdmin.initializeApp({
 // this is for checking what plays exist, for example
 var Firebase = require('firebase');
 Firebase.initializeApp(config.services.firebase);
-var firebaseRef = Firebase.database().ref();
+var firebaseRef = Firebase.database().ref;
 var firepad = require('firepad');
 
 /* Authentication Sessions */
@@ -72,7 +72,7 @@ router.get('/plays', function(req, res, next) {
     plays = [];
     firebaseRef.child('plays').once("value", function(snapshot){
       snapshot.forEach(function(play){
-        plays.push(play.key());
+        plays.push(play.key);
       });
       res.render('plays', {title: 'Plays', plays: plays});
     });
@@ -82,7 +82,7 @@ router.get('/plays', function(req, res, next) {
     To make our life easier, we will render the same page (play.jade) with extra JS depending on whether or not the person rendering it is a cuer (leader) or client (watcher).
 */
 router.get('/play/:playName/:currIndex', isLoggedIn, isExistingPlay, function(req, res, next) {
-    var headless = new firepad.Headless(req.snapshot.child('firepad').ref());
+    var headless = new firepad.Headless(req.snapshot.child('firepad').ref);
     headless.getText(function(text){
         headless.dispose(); // don't need it anymore
         var corpus;
@@ -103,7 +103,7 @@ router.get('/play/:playName/:currIndex', isLoggedIn, isExistingPlay, function(re
 });
 
 router.get('/watch/:playName/:currIndex', isExistingPlay, function(req, res, next) {
-    var headless = new firepad.Headless(req.snapshot.child('firepad').ref());
+    var headless = new firepad.Headless(req.snapshot.child('firepad').ref);
     headless.getText(function(text){
         headless.dispose(); // don't need it anymore
         var corpus;
@@ -124,7 +124,7 @@ router.get('/watch/:playName/:currIndex', isExistingPlay, function(req, res, nex
 });
 
 router.get('/source/:playName', isLoggedIn, isExistingPlay, function(req, res, next) {
-    var headless = new firepad.Headless(req.snapshot.child('firepad').ref());
+    var headless = new firepad.Headless(req.snapshot.child('firepad').ref);
     headless.getText(function(text){
         headless.dispose(); // don't need it anymore
 
@@ -139,7 +139,7 @@ router.get('/source/:playName', isLoggedIn, isExistingPlay, function(req, res, n
 });
 
 router.get('/download/:playName', isLoggedIn, isExistingPlay, function(req, res, next) {
-    var headless = new firepad.Headless(req.snapshot.child('firepad').ref());
+    var headless = new firepad.Headless(req.snapshot.child('firepad').ref);
     headless.getText(function(text){
         headless.dispose(); // don't need it anymore
 
