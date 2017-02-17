@@ -9,7 +9,7 @@ var credential = require(config.services.firebase.credentialPath);
 firebaseAdmin.initializeApp({
   credential: firebaseAdmin.credential.cert(credential),
   databaseURL: config.services.firebase.databaseURL
-});
+}, "admin-read-access");
 
 // this is for checking what plays exist, for example
 var Firebase = require('firebase');

@@ -25,7 +25,7 @@ if(app.get('env') === 'production') {
     var ref = firebaseAdmin.initializeApp({
       credential: firebaseAdmin.credential.cert(config.services.session.firebase.credentialPath),
       databaseURL: config.services.session.firebase.databaseURL
-    });
+    }, "sessions");
     sessionConfigs.store = new FirebaseStore({database: ref.database()});
     sessionConfigs.resave = true;
     sessionConfigs.saveUninitialized = true;
@@ -35,9 +35,9 @@ app.use(passport.initialize());
 app.use(passport.session());
 require('./services/passport')(passport);
 
-var Firebase = require('firebase');
-Firebase.initializeApp(config.services.firebase);
-var firebaseRef = Firebase.database().ref();
+// var Firebase = require('firebase');
+// Firebase.initializeApp(config.services.firebase);
+// var firebaseRef = Firebase.database().ref();
 //require('./services/firebase')(firebaseRef, function(playName, text){
 //    console.log('Writing a play: ', playName);
 //    fs.writeFileSync('./data/'+playName+'.yml',text);
