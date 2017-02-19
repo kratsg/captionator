@@ -21,7 +21,7 @@ var isLoggedIn = function (req, res, next) {
 
     // if they aren't redirect them to the home page
     req.session.returnTo = req.url;
-    res.redirect('/');
+    res.redirect('/auth/facebook');
 };
 
 var isExistingPlay = function(req, res, next) {
