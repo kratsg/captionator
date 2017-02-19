@@ -49,7 +49,7 @@ html
     script(src='/js/mousetrap.min.js')
     script.
         socket.on('connect', function(){
-            socket.emit('subscribe', playName);
+            socket.emit('subscribe', window.playName);
         });
 
     body
