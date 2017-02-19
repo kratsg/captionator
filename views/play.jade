@@ -10,6 +10,12 @@ html
     meta(name='viewport', content='user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1')
     meta(name='msapplication-tap-highlight', content='no')
 
+    // Latest compiled and minified CSS
+    link(rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous")
+
+    // Add FontAwesome
+    link(rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css")
+
     script.
         var socket = io.connect('', {
             query: 'token=#{locals.jwt}'
@@ -55,17 +61,17 @@ html
         each item in corpus
             if item instanceof Array
                 // item is a single slide, iterate over it
-                div.slide(class=(slideIndex == currIndex ? "active" : undefined))
+                div.slide(class=(slideIndex == currIndex ? "active" : undefined)).container-fluid
                     each line in item
                         if typeof(line) == 'string'
                           - throw Error('You gave me a line without a character: "'+line+'"')
-                        section.line
+                        section.line.row
                             each dialogue, character in line
-                                div.character(data-character=character.toLowerCase())= character
+                                div.character(data-character=character.toLowerCase()).col-xs-12.col-sm-2= character
                                 if dialogue instanceof Array
                                     <!-- multiple lines for #{character} -->
                                     - dialogue = dialogue.join('<br/>')
-                                div.dialogue!= dialogue
+                                div.dialogue.col-xs-12.col-sm-10!= dialogue
                             div.clear
                 - slideIndex++
             else
@@ -76,13 +82,13 @@ html
                     if typeof(character) == 'number'
                       - throw Error('You gave at least one line without a character: '+item)
                     each dialogue in lines
-                        div.slide(class=(slideIndex == currIndex ? "active" : undefined))
-                            section.line
-                                div.character(data-character=character.toLowerCase())= character
+                        div.slide(class=(slideIndex == currIndex ? "active" : undefined)).container-fluid
+                            section.line.row
+                                div.character(data-character=character.toLowerCase()).col-xs-12.col-sm-2= character
                                 if dialogue instanceof Array
                                     <!-- multiple lines for #{character} -->
                                     - dialogue = dialogue.join('<br/>')
-                                div.dialogue!= dialogue
+                                div.dialogue.col-xs-12.col-sm-10!= dialogue
                                 div.clear
                         - slideIndex++
         script(src='/js/play.js')
