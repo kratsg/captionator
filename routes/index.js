@@ -20,6 +20,7 @@ var isLoggedIn = function (req, res, next) {
     if (req.isAuthenticated()) return next();
 
     // if they aren't redirect them to the home page
+    req.session.returnTo = req.url;
     res.redirect('/');
 };
 
@@ -43,7 +44,8 @@ router.get('/auth/facebook',
 
 router.get('/auth/facebook/callback',
     passport.authenticate('facebook', {
-        successRedirect: '/',
+        // allows us to use url in req.session.returnTo
+        successReturnToOrRedirect: '/',
         failureRedirect: '/',
         failureFlash: true,
         display: 'popup' // not using javascript SDK
