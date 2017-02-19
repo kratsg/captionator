@@ -16,12 +16,23 @@ html
     // Add FontAwesome
     link(rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css")
 
+    link(rel='stylesheet', href='/css/dark.css')
+    link(rel='stylesheet', href='/css/play.css')
+    link(rel='stylesheet', href='/css/#{playName}.css')
+    if !client
+        link(rel='stylesheet', href='/css/control.css')
+    script.
+        window.socketToken = "#{locals.jwt}";
+        window.playName = "#{playName}";
+    script(src='/js/mousetrap.min.js')
     script.
         var socket = io.connect('', {
-            query: 'token=#{locals.jwt}'
+            query: 'token='+window.socketToken
         });
         socket.on('connect', function() {
             console.log('connected and authenticated socket');
+            console.log('subscribing to '+window.playName);
+            socket.emit('subscribe', window.playName);
             $('body').addClass('online').removeClass('error');
             $('#connectionStatus').removeAttr('data-err-msg');
         });
@@ -37,19 +48,6 @@ html
                 console.log("User's token has expired");
                 $('#connectionStatus').attr('data-err-msg', 'token expired. Please refresh.');
             }
-        });
-
-    link(rel='stylesheet', href='/css/dark.css')
-    link(rel='stylesheet', href='/css/play.css')
-    link(rel='stylesheet', href='/css/#{playName}.css')
-    if !client
-        link(rel='stylesheet', href='/css/control.css')
-    script.
-        window.playName = "#{playName}";
-    script(src='/js/mousetrap.min.js')
-    script.
-        socket.on('connect', function(){
-            socket.emit('subscribe', window.playName);
         });
 
     body
