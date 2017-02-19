@@ -57,10 +57,10 @@ html
                 // item is a single slide, iterate over it
                 div.slide(class=(slideIndex == currIndex ? "active" : undefined))
                     each line in item
+                        if typeof(line) == 'string'
+                          - throw Error('You gave me a line without a character: "'+line+'"')
                         section.line
                             each dialogue, character in line
-                                if typeof(line) == 'string'
-                                  - throw Error('You gave me a line without a character: "'+line+'"')
                                 div.character(data-character=character.toLowerCase())= character
                                 if dialogue instanceof Array
                                     <!-- multiple lines for #{character} -->
@@ -73,6 +73,8 @@ html
                 each lines, character in item
                     unless lines instanceof Array
                         - lines = [lines]
+                    if typeof(character) == 'number'
+                      - throw Error('You gave at least one line without a character: '+item)
                     each dialogue in lines
                         div.slide(class=(slideIndex == currIndex ? "active" : undefined))
                             section.line
