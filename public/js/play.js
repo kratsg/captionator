@@ -38,9 +38,9 @@ var play = (function(){
 
     var blankScreen = function(method){
         if(typeof method == "undefined") method = 'toggle';
-        if(method == 'toggle') $('body').toggleClass('hide');
-        if(method == 'hide')   $('body').removeClass('hide');
-        if(method == 'show')   $('body').addClass('hide');
+        if(method == 'toggle') $('body').toggleClass('blankScreen');
+        if(method == 'hide')   $('body').removeClass('blankScreen');
+        if(method == 'show')   $('body').addClass('blankScreen');
     };
 
     var toggleGrid = function(){

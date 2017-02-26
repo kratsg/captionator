@@ -14,8 +14,8 @@ body {
     padding-top: 20px;
 }
 
-/* hide the body when we want to */
-body.hide {
+/* blank screen the body when we want to */
+body.blankScreen {
     opacity: 0.0;
 }
 

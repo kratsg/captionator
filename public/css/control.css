@@ -4,12 +4,12 @@ body {
 }
 
 /* do not need body to be hidden on control */
-body.hide {
+body.blankScreen {
     opacity: 0.5;
 }
 
 /* make sure people know it's hidden */
-body.hide::after {
+body.blankScreen::after {
     content: "hidden";
     color: red;
 }
